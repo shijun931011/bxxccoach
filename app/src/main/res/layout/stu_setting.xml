@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+    <include layout="@layout/title"/>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal">
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="match_parent"
+                  android:layout_weight="8"
+                  android:padding="10dp"
+                  android:text="学员数量"/>
+        <TextView android:layout_width="20dp"
+                  android:layout_height="match_parent"
+                  android:gravity="right"
+                  android:padding="10dp"
+                  android:layout_weight="1"
+                  android:id="@+id/maxNum_text"
+                  android:text="30"/>
+        <EditText android:layout_width="wrap_content"
+                  android:id="@+id/maxNum_edit"
+                  android:layout_height="match_parent"
+                  android:gravity="right"
+                  android:background="@drawable/rounded_edit"
+                  android:visibility="gone"
+                  android:padding="10dp"
+                  android:layout_weight="1"
+                  android:text="30"/>
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="match_parent"
+                  android:layout_weight="1"
+                  android:paddingLeft="5dp"
+                  android:padding="10dp"
+                  android:text="人"/>
+    </LinearLayout>
+    <View android:layout_width="match_parent"
+          android:layout_height="1dp"
+    android:background="@color/white"/>
+    <TextView android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:padding="10dp"
+              android:hint="\u3000\u3000学员数量是指您在同一时间段内最高可教的学员数，默认为30人，您可以手动设置学员数，但最高不得超过30人"/>
+</LinearLayout>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+    <include layout="@layout/title"/>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="40dp"
+                  android:orientation="horizontal"
+                  android:padding="10dp">
+        <TextView android:id="@+id/up"
+                  android:layout_width="wrap_content"
+                  android:layout_height="match_parent"
+                  android:layout_marginLeft="15dp"
+                  android:layout_weight="1"
+                  android:text="&lt; 前一天"
+                  android:textColor="@color/orange"/>
+        <TextView android:id="@+id/day"
+                  android:layout_width="wrap_content"
+                  android:layout_height="match_parent"
+                  android:layout_marginLeft="15dp"
+                  android:layout_weight="1"
+                  android:gravity="center"
+                  android:text="2016年12月13日"/>
+        <TextView android:id="@+id/next"
+                  android:layout_width="wrap_content"
+                  android:layout_height="match_parent"
+                  android:layout_marginLeft="15dp"
+                  android:layout_marginRight="15dp"
+                  android:layout_weight="1"
+                  android:gravity="right"
+                  android:text="后一天 >"
+                  android:textColor="@color/orange"/>
+    </LinearLayout>
+    <View android:layout_width="match_parent"
+          android:layout_height="5dp"
+          android:background="@color/white"/>
+    <ScrollView android:id="@+id/scrollView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+        <com.jgkj.bxxccoach.tools.ListViewForScrollView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </ScrollView>
+    <TextView android:id="@+id/textView"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="暂时无人预约"
+              android:gravity="center_horizontal"
+              android:padding="10dp"
+              android:visibility="gone"/>
+</LinearLayout>

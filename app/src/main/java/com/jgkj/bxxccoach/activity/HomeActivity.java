@@ -158,7 +158,7 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
         mtabBxxcTxt.setTextColor(this.getResources().getColor(R.color.gray));
         mtabScheduleImg.setImageResource(R.drawable.class_unselect);
         mtabScheduleTxt.setTextColor(this.getResources().getColor(R.color.gray));
-        mtabPersonalImg.setImageResource(R.drawable.me_unselected);
+        mtabPersonalImg.setImageResource(R.drawable.me_unselect);
         mtabPersonalTxt.setTextColor(this.getResources().getColor(R.color.gray));
     }
 

@@ -130,7 +130,6 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener{
     public String getDay(int day){
         SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
         Calendar c = Calendar.getInstance();
-        //System.out.println("当前日期："+sf.format(c.getTime()));
         c.add(Calendar.DAY_OF_MONTH, day);
         String dd = sf.format(c.getTime()).toString();
         return dd.substring(dd.length()-2,dd.length());
@@ -151,7 +150,6 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener{
     public String getWeek(int day){
         SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
         Calendar c = Calendar.getInstance();
-        //System.out.println("当前日期："+sf.format(c.getTime()));
         c.add(Calendar.DAY_OF_MONTH, day);
         String dd = sf.format(c.getTime()).toString();
         String week = "";

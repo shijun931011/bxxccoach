@@ -74,7 +74,7 @@
                 android:layout_height="30dp"
                 android:layout_margin="2dp"
                 android:clickable="false"
-                android:src="@drawable/me_unselected" />
+                android:src="@drawable/me_unselect" />
 
             <TextView
                 android:id="@+id/tab_personal_txt"

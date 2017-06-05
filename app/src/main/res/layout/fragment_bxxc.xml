@@ -1,13 +1,53 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context="com.jgkj.bxxccoach.fragment.BxxcFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+             android:background="@color/white"
+             android:orientation="vertical">
+    <!-- ViewPage轮播图设置 -->
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"/>
+        android:layout_height="180dp">
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="true"
+            android:layout_centerHorizontal="true" />
+        <LinearLayout
+            android:id="@+id/linearlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/viewPage"
+            android:layout_marginBottom="5dp"
+            android:gravity="center"
+            android:orientation="horizontal"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/bxhead"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/bxhead"
+            android:padding="10dp"
+        />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/background"/>
+        <com.jgkj.bxxccoach.tools.AutoTextView
+            android:id="@+id/headlines"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:text="科技改变生活，百信引领学车!科技改变生活，百信引领学车!科技改变生活，百信引领学车!科
+技改变生活，百信引领学车!科技改变生活，百信引领学车!"/>
+    </LinearLayout>
 
-</FrameLayout>
+</LinearLayout>

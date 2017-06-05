@@ -56,7 +56,6 @@ public class SetSubjectActivity extends Activity implements View.OnClickListener
 
     /**
      * 创建天数和时间
-     *
      * @param date1 当前时间
      */
     private void createTime(Date date1) {

@@ -87,7 +87,6 @@ public class MySubjectActivity extends Activity implements View.OnClickListener{
         subSet.setVisibility(View.VISIBLE);
         subSet.setText("排课");
         subSet.setOnClickListener(this);
-
         listView = (ListView) findViewById(R.id.listView);
     }
 

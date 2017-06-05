@@ -1,4 +1,4 @@
-package com.jgkj.bxxccoach;
+package com.jgkj.bxxccoach.activity;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
+import com.jgkj.bxxccoach.R;
 import com.jgkj.bxxccoach.bean.NoResultAction;
 import com.jgkj.bxxccoach.bean.UserInfo;
 import com.jgkj.bxxccoach.bean.Version;
@@ -77,7 +78,6 @@ public class MainActivity extends Activity implements View.OnClickListener,
      */
     private void setData() {
         sp = getSharedPreferences("Coach", Activity.MODE_PRIVATE);
-
         SharedPreferences sp1 = getSharedPreferences("CoachToken", Activity.MODE_PRIVATE);
         token = sp1.getString("CoachToken", null);
 
@@ -153,7 +153,6 @@ public class MainActivity extends Activity implements View.OnClickListener,
         customer = (TextView) findViewById(R.id.customer);
         customer.setOnClickListener(this);
         mCurrentNum = (TextView) findViewById(R.id.mCurrentNum);
-
         credit = (LinearLayout) findViewById(R.id.credit);
         teach = (LinearLayout) findViewById(R.id.teach);
         goodpraise = (TextView) findViewById(R.id.goodpraise);
@@ -163,7 +162,6 @@ public class MainActivity extends Activity implements View.OnClickListener,
         wait = (LinearLayout) findViewById(R.id.wait);
         total_num = (TextView) findViewById(R.id.total_num);
         head = (ImageView) findViewById(R.id.head);
-
         //下拉刷新
         swipeLayout = (RefreshLayout) findViewById(R.id.refresh);
         swipeLayout.setColorSchemeResources(R.color.color_bule2, R.color.color_bule, R.color.color_bule2, R.color.color_bule3);

@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.jgkj.bxxccoach.PageFragment;
+import com.jgkj.bxxccoach.fragment.PageFragment;
 
 /**
  * Created by fangzhou on 2017/1/4.

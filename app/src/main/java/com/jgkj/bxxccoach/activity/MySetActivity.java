@@ -1,11 +1,10 @@
-package com.jgkj.bxxccoach;
+package com.jgkj.bxxccoach.activity;
 
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.jgkj.bxxccoach.R;
 import com.jgkj.bxxccoach.bean.Version;
 import com.jgkj.bxxccoach.tools.GetVersion;
 import com.jgkj.bxxccoach.tools.GlideCacheUtil;

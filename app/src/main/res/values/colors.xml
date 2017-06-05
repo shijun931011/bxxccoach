@@ -30,6 +30,7 @@
     <color name="zu_choose_left_item_bg">#E5E5E5</color>
     <color name="zu_choose_right_item_bg">#F3F3F3</color>
     <color name="list_text_select_color">#FF822E</color>
-    <color name="themeColor">#FF5000</color>
+    <color name="themeColor">#37363C</color>
     <color name="green">#009049</color>
+
 </resources>

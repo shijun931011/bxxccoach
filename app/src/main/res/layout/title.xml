@@ -3,7 +3,7 @@
                 android:id="@+id/layout_titlebar"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="@color/themeColor">
+                android:background="#37363C">
     <TextView
         android:id="@+id/text_title"
         android:layout_width="match_parent"

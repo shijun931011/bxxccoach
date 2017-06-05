@@ -1,4 +1,4 @@
-package com.jgkj.bxxccoach;
+package com.jgkj.bxxccoach.activity;
 
 import android.app.Activity;
 import android.app.Notification;
@@ -16,12 +16,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.jgkj.bxxccoach.R;
 import com.jgkj.bxxccoach.bean.UserInfo;
 import com.jgkj.bxxccoach.tools.JPushDataUitl;
+import com.jgkj.bxxccoach.tools.Md5;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
-import java.security.MessageDigest;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -68,9 +69,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             case R.id.login_button_id:
                 String name = username.getText().toString();
                 String pwd = password.getText().toString();
-
-                String passmd5 = MD5(pwd);
-                String encryptmd5 = MD5(passmd5+name);
+                String passmd5 = Md5.md5(pwd);
+                String encryptmd5 = Md5.md5(passmd5+name);
 
                 if (name.equals("") || name == null) {
                     Toast.makeText(LoginActivity.this, "账号不能为空", Toast.LENGTH_SHORT).show();
@@ -301,34 +301,34 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     }
 
 
-    // MD5加密，32位
-    public static String MD5(String str) {
-        MessageDigest md5 =null;
-        try {
-            md5 = MessageDigest.getInstance("MD5");
-        } catch(Exception e) {
-            e.printStackTrace();
-            return "";
-        }
-
-        char[] charArray = str.toCharArray();
-        byte[] byteArray =new byte[charArray.length];
-
-        for (int i = 0; i < charArray.length; i++) {
-            byteArray[i] = (byte) charArray[i];
-        }
-        byte[] md5Bytes = md5.digest(byteArray);
-
-        StringBuffer hexValue =new StringBuffer();
-        for (int i = 0; i < md5Bytes.length; i++) {
-            int val = ((int) md5Bytes[i]) &0xff;
-            if (val < 16) {
-                hexValue.append("0");
-            }
-            hexValue.append(Integer.toHexString(val));
-        }
-        return hexValue.toString();
-    }
+//    // MD5加密，32位
+//    public static String MD5(String str) {
+//        MessageDigest md5 =null;
+//        try {
+//            md5 = MessageDigest.getInstance("MD5");
+//        } catch(Exception e) {
+//            e.printStackTrace();
+//            return "";
+//        }
+//
+//        char[] charArray = str.toCharArray();
+//        byte[] byteArray =new byte[charArray.length];
+//
+//        for (int i = 0; i < charArray.length; i++) {
+//            byteArray[i] = (byte) charArray[i];
+//        }
+//        byte[] md5Bytes = md5.digest(byteArray);
+//
+//        StringBuffer hexValue =new StringBuffer();
+//        for (int i = 0; i < md5Bytes.length; i++) {
+//            int val = ((int) md5Bytes[i]) &0xff;
+//            if (val < 16) {
+//                hexValue.append("0");
+//            }
+//            hexValue.append(Integer.toHexString(val));
+//        }
+//        return hexValue.toString();
+//    }
 
 
 

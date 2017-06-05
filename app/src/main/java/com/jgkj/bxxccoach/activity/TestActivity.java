@@ -1,4 +1,4 @@
-package com.jgkj.bxxccoach;
+package com.jgkj.bxxccoach.activity;
 
 import android.app.Activity;
 import android.content.Intent;

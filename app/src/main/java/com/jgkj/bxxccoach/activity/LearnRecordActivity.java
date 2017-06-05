@@ -1,4 +1,4 @@
-package com.jgkj.bxxccoach;
+package com.jgkj.bxxccoach.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
+import com.jgkj.bxxccoach.R;
 import com.jgkj.bxxccoach.adapter.LearnRecordAdapter;
 import com.jgkj.bxxccoach.bean.StuRecord;
 import com.jgkj.bxxccoach.tools.CallDialog;

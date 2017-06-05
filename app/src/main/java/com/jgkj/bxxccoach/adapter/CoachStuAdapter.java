@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.jgkj.bxxccoach.MainActivity;
 import com.jgkj.bxxccoach.R;
 import com.jgkj.bxxccoach.bean.StuMsg;
 

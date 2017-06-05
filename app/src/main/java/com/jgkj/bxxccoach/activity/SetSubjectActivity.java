@@ -1,26 +1,23 @@
-package com.jgkj.bxxccoach;
+package com.jgkj.bxxccoach.activity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.jgkj.bxxccoach.adapter.StuSubAdapter;
+import com.jgkj.bxxccoach.R;
 import com.jgkj.bxxccoach.adapter.StuSubNewAdapter;
 import com.jgkj.bxxccoach.bean.CreateDay_Time;
 import com.jgkj.bxxccoach.bean.GetSetedTime;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;

@@ -1,4 +1,4 @@
-package com.jgkj.bxxccoach;
+package com.jgkj.bxxccoach.activity;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -6,13 +6,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.widget.ImageView;
 
+import com.jgkj.bxxccoach.R;
 import com.jgkj.bxxccoach.tools.PictureOptimization;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -67,7 +65,7 @@ public class WelcomeActivity extends Activity {
                     SharedPreferences.Editor editor3 = sp2.edit();
                     editor3.putLong("sessionTime",currentTime);
                     editor3.commit();
-                    intent.setClass(WelcomeActivity.this, MainActivity.class);
+                    intent.setClass(WelcomeActivity.this, HomeActivity.class);
                 }
                 startActivity(intent);
                 finish();
@@ -77,21 +75,5 @@ public class WelcomeActivity extends Activity {
     }
 }
 
-//┏┓　　　┏┓
-//┏┛┻━━━┛┻┓
-//┃　　　　　　　┃ 　
-//┃　　　━　　　┃
-//┃　┳┛　┗┳　┃
-//┃　　　　　　　┃
-//┃　　　┻　　　┃
-//┃　　　　　　　┃
-//┗━┓　　　┏━┛
-//    ┃　　　┃  神兽保佑　　　　　　　　
-//    ┃　　　┃  代码无忧！
-//    ┃　　　┗━━━┓
-//    ┃　　　　　　　┣┓
-//    ┃　　　　　　　┏┛
-//    ┗┓┓┏━┳┓┏┛
-// 	    ┃┫┫　┃┫┫
-//      ┗┻┛　┗┻┛
+
 

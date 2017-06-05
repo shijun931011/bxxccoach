@@ -2,7 +2,6 @@ package com.jgkj.bxxccoach.adapter;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +13,6 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
-import com.jgkj.bxxccoach.MainActivity;
-import com.jgkj.bxxccoach.MySubjectActivity;
 import com.jgkj.bxxccoach.R;
 import com.jgkj.bxxccoach.bean.NoResultAction;
 import com.jgkj.bxxccoach.bean.SubjectDetail;
@@ -24,7 +21,6 @@ import com.jgkj.bxxccoach.tools.SureStudyDialog;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Call;

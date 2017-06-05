@@ -9,10 +9,8 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.google.gson.Gson;
-import com.jgkj.bxxccoach.MainActivity;
-import com.jgkj.bxxccoach.MySubjectActivity;
-import com.jgkj.bxxccoach.TestActivity;
-import com.jgkj.bxxccoach.WelcomeActivity;
+import com.jgkj.bxxccoach.activity.MainActivity;
+import com.jgkj.bxxccoach.activity.MySubjectActivity;
 import com.jgkj.bxxccoach.bean.UserInfo;
 
 import org.json.JSONException;

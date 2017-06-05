@@ -1,4 +1,4 @@
-package com.jgkj.bxxccoach;
+package com.jgkj.bxxccoach.fragment;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -18,6 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.jgkj.bxxccoach.R;
+import com.jgkj.bxxccoach.activity.LearnRecordActivity;
 import com.jgkj.bxxccoach.adapter.CoachStuAdapter;
 import com.jgkj.bxxccoach.bean.StuMsg;
 import com.jgkj.bxxccoach.bean.UserInfo;

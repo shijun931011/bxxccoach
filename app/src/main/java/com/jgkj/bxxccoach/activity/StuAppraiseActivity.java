@@ -1,11 +1,10 @@
-package com.jgkj.bxxccoach;
+package com.jgkj.bxxccoach.activity;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -13,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.jgkj.bxxccoach.R;
 import com.jgkj.bxxccoach.adapter.StuAppraiseAdapter;
 import com.jgkj.bxxccoach.bean.StuAppraise;
 import com.jgkj.bxxccoach.tools.RefreshLayout;

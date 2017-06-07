@@ -58,9 +58,9 @@ public class ManagementCreditActivity extends Activity {
         CircularLayout circularLayout2 = (CircularLayout) findViewById(R.id.layout_mainActivity_circular2);
         setup(spiderWebScoreView2, circularLayout2, new Score(Float.parseFloat(userInfo.getResult().getPraise())/20),
                 new Score(Float.parseFloat(userInfo.getResult().getPass())/20),
-                new Score(Float.parseFloat(userInfo.getResult().getTeach())/20),
-                new Score(Float.parseFloat(userInfo.getResult().getWait())/20),
-                new Score(Float.parseFloat(userInfo.getResult().getCredit())/20));
+                new Score(Float.parseFloat(userInfo.getResult().getTeach())),
+                new Score(Float.parseFloat(userInfo.getResult().getWait())),
+                new Score(Float.parseFloat(userInfo.getResult().getCredit())));
 
     }
 

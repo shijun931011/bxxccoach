@@ -111,6 +111,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                         }
                         @Override
                         public void onResponse(String s, int i) {
+                            Log.i("百信学车","登录结果" + s);
                             login_btn.setTag(s);
                             if(login_btn.getTag()!=null){
                                 setData();
@@ -149,7 +150,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             editor1.commit();
 
             Intent intent = new Intent();
-            intent.setClass(LoginActivity.this,MainActivity.class);
+            intent.setClass(LoginActivity.this,HomeActivity.class);
             startActivity(intent);
             finish();
         }else{

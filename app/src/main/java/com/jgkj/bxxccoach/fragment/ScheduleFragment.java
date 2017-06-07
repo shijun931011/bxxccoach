@@ -8,9 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.jgkj.bxxccoach.R;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -48,6 +46,7 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener{
     private LinearLayout linearLayout7;
 
     private View view;
+    private TextView tv_day;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -56,7 +55,6 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener{
         initView();
         return view;
     }
-
 
     private void initView(){
 
@@ -99,23 +97,26 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener{
         linearLayout6.setOnClickListener(this);
         linearLayout7.setOnClickListener(this);
 
+        //教练排课要提前三天
+        tv_day = (TextView)view.findViewById(R.id.tv_day);
+        tv_day.setText(getTempDay());
         //设置星期
-        tv1_week.setText(getWeek(0));
-        tv2_week.setText(getWeek(1));
-        tv3_week.setText(getWeek(2));
-        tv4_week.setText(getWeek(3));
-        tv5_week.setText(getWeek(4));
-        tv6_week.setText(getWeek(5));
-        tv7_week.setText(getWeek(6));
+        tv1_week.setText(getWeek(3));
+        tv2_week.setText(getWeek(4));
+        tv3_week.setText(getWeek(5));
+        tv4_week.setText(getWeek(6));
+        tv5_week.setText(getWeek(7));
+        tv6_week.setText(getWeek(8));
+        tv7_week.setText(getWeek(9));
 
         //设置日期号
-        tv1_number.setText(getDay(0));
-        tv2_number.setText(getDay(1));
-        tv3_number.setText(getDay(2));
-        tv4_number.setText(getDay(3));
-        tv5_number.setText(getDay(4));
-        tv6_number.setText(getDay(5));
-        tv7_number.setText(getDay(6));
+        tv1_number.setText(getDay(3));
+        tv2_number.setText(getDay(4));
+        tv3_number.setText(getDay(5));
+        tv4_number.setText(getDay(6));
+        tv5_number.setText(getDay(7));
+        tv6_number.setText(getDay(8));
+        tv7_number.setText(getDay(9));
 
         tv_bg_01.setBackgroundResource(R.color.list_text_select_color);
         tv_bg_02.setBackgroundResource(R.color.white);
@@ -133,6 +134,15 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener{
         c.add(Calendar.DAY_OF_MONTH, day);
         String dd = sf.format(c.getTime()).toString();
         return dd.substring(dd.length()-2,dd.length());
+    }
+
+    //获取三天后时间
+    public String getTempDay(){
+        SimpleDateFormat sf = new SimpleDateFormat("yyyy年MM月dd日");
+        Calendar c = Calendar.getInstance();
+        c.add(Calendar.DAY_OF_MONTH, 3);
+        String dd = sf.format(c.getTime()).toString();
+        return dd;
     }
 
     //日期转星期
@@ -173,7 +183,6 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener{
                 tv_bg_06.setBackgroundResource(R.color.white);
                 tv_bg_07.setBackgroundResource(R.color.white);
 
-
                 break;
             case R.id.linearLayout2:
                 tv_bg_01.setBackgroundResource(R.color.white);
@@ -183,7 +192,6 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener{
                 tv_bg_05.setBackgroundResource(R.color.white);
                 tv_bg_06.setBackgroundResource(R.color.white);
                 tv_bg_07.setBackgroundResource(R.color.white);
-
 
                 break;
             case R.id.linearLayout3:
@@ -195,7 +203,6 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener{
                 tv_bg_06.setBackgroundResource(R.color.white);
                 tv_bg_07.setBackgroundResource(R.color.white);
 
-
                 break;
             case R.id.linearLayout4:
                 tv_bg_01.setBackgroundResource(R.color.white);
@@ -205,7 +212,6 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener{
                 tv_bg_05.setBackgroundResource(R.color.white);
                 tv_bg_06.setBackgroundResource(R.color.white);
                 tv_bg_07.setBackgroundResource(R.color.white);
-
 
                 break;
             case R.id.linearLayout5:
@@ -217,7 +223,6 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener{
                 tv_bg_06.setBackgroundResource(R.color.white);
                 tv_bg_07.setBackgroundResource(R.color.white);
 
-
                 break;
             case R.id.linearLayout6:
                 tv_bg_01.setBackgroundResource(R.color.white);
@@ -228,7 +233,6 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener{
                 tv_bg_06.setBackgroundResource(R.color.list_text_select_color);
                 tv_bg_07.setBackgroundResource(R.color.white);
 
-
                 break;
             case R.id.linearLayout7:
                 tv_bg_01.setBackgroundResource(R.color.white);
@@ -238,7 +242,6 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener{
                 tv_bg_05.setBackgroundResource(R.color.white);
                 tv_bg_06.setBackgroundResource(R.color.white);
                 tv_bg_07.setBackgroundResource(R.color.list_text_select_color);
-
 
                 break;
         }

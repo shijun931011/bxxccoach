@@ -45,7 +45,6 @@
                     android:layout_marginTop="10dp"
                     android:gravity="center"
                     android:text="周一"
-                    android:textColor="#FF8000"
                     android:textSize="18sp" />
 
                 <TextView
@@ -76,7 +75,6 @@
                     android:layout_marginTop="10dp"
                     android:gravity="center"
                     android:text="周二"
-                    android:textColor="#FF8000"
                     android:textSize="18sp" />
 
                 <TextView
@@ -107,7 +105,6 @@
                     android:layout_marginTop="10dp"
                     android:gravity="center"
                     android:text="周三"
-                    android:textColor="#FF8000"
                     android:textSize="18sp" />
 
                 <TextView
@@ -138,7 +135,6 @@
                     android:layout_marginTop="10dp"
                     android:gravity="center"
                     android:text="周四"
-                    android:textColor="#FF8000"
                     android:textSize="18sp" />
 
                 <TextView
@@ -169,7 +165,6 @@
                     android:layout_marginTop="10dp"
                     android:gravity="center"
                     android:text="周五"
-                    android:textColor="#FF8000"
                     android:textSize="18sp" />
 
                 <TextView
@@ -200,7 +195,6 @@
                     android:layout_marginTop="10dp"
                     android:gravity="center"
                     android:text="周六"
-                    android:textColor="#FF8000"
                     android:textSize="18sp" />
 
                 <TextView
@@ -231,7 +225,6 @@
                     android:layout_marginTop="10dp"
                     android:gravity="center"
                     android:text="周末"
-                    android:textColor="#FF8000"
                     android:textSize="18sp" />
 
                 <TextView
@@ -300,12 +293,37 @@
 
         </LinearLayout>
 
-        <ListView
+        <View
             android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:background="#777777"
+            android:layout_height="0.2dp">
+        </View>
+
+        <ListView
             android:id="@+id/listView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:divider="@null"
             android:scrollbars="none"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:background="#777777"
+            android:layout_height="0.1dp">
+        </View>
+
+        <Button
+            android:id="@+id/btn_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/btn_selector"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="提交课表"
+            android:textColor="#ffffff"
+            />
 
     </LinearLayout>
 

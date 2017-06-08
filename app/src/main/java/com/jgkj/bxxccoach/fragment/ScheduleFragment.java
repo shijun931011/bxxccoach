@@ -1,18 +1,42 @@
 package com.jgkj.bxxccoach.fragment;
 
 
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
 import com.jgkj.bxxccoach.R;
+import com.jgkj.bxxccoach.activity.ModifyLoginPasswordActivity;
+import com.jgkj.bxxccoach.adapter.ScheduleAdapter;
+import com.jgkj.bxxccoach.bean.UserInfo;
+import com.jgkj.bxxccoach.bean.entity.BaseEntity.BaseEntity;
+import com.jgkj.bxxccoach.bean.entity.ScheduleEntity.ScheduleEntity;
+import com.jgkj.bxxccoach.bean.entity.ScheduleEntity.ScheduleResult;
+import com.jgkj.bxxccoach.tools.Urls;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+
+import okhttp3.Call;
 
 public class ScheduleFragment extends Fragment implements View.OnClickListener{
 
@@ -47,10 +71,22 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener{
 
     private View view;
     private TextView tv_day;
+    private ListView listView;
+    private Button btn_confirm;
+
+    private ScheduleAdapter adapter;
+    private List<ScheduleEntity> scheduleList = new ArrayList<>();
+    private List<ScheduleEntity> scheduleTempList = new ArrayList<>();
+    private List<String> StringList = new ArrayList<>();
+
+    private UserInfo userInfo;
+    //标记哪一天
+    private String day;
+    private String MM;
+    private ProgressDialog dialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_schedule, container, false);
         initView();
         return view;
@@ -99,7 +135,7 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener{
 
         //教练排课要提前三天
         tv_day = (TextView)view.findViewById(R.id.tv_day);
-        tv_day.setText(getTempDay());
+        tv_day.setText(getTempDay(3));
         //设置星期
         tv1_week.setText(getWeek(3));
         tv2_week.setText(getWeek(4));
@@ -126,6 +162,20 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener{
         tv_bg_06.setBackgroundResource(R.color.white);
         tv_bg_07.setBackgroundResource(R.color.white);
 
+        //day默认为第三天
+        day = getTempDay(3);
+        MM = tv1_number.getText().toString();
+        btn_confirm = (Button)view.findViewById(R.id.btn_confirm);
+        btn_confirm.setOnClickListener(this);
+        listView = (ListView) view.findViewById(R.id.listView);
+        SharedPreferences sp = getActivity().getSharedPreferences("Coach", Activity.MODE_PRIVATE);
+        String str = sp.getString("CoachInfo", null);
+        Gson gson = new Gson();
+        userInfo = gson.fromJson(str,UserInfo.class);
+
+        //请求数据
+        getData(userInfo.getResult().getPid(), Urls.makeCourse);
+
     }
     //获取一个星期日期 格式dd
     public String getDay(int day){
@@ -136,11 +186,11 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener{
         return dd.substring(dd.length()-2,dd.length());
     }
 
-    //获取三天后时间
-    public String getTempDay(){
+    //获取 i 天后的时间
+    public String getTempDay(int i){
         SimpleDateFormat sf = new SimpleDateFormat("yyyy年MM月dd日");
         Calendar c = Calendar.getInstance();
-        c.add(Calendar.DAY_OF_MONTH, 3);
+        c.add(Calendar.DAY_OF_MONTH, i);
         String dd = sf.format(c.getTime()).toString();
         return dd;
     }
@@ -183,6 +233,11 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener{
                 tv_bg_06.setBackgroundResource(R.color.white);
                 tv_bg_07.setBackgroundResource(R.color.white);
 
+                day = getTempDay(3);
+                MM = tv1_number.getText().toString();
+                scheduleTempList = doscheduleList(tv1_number.getText().toString());
+                adapter = new ScheduleAdapter(getActivity(),StringList,scheduleTempList);
+                listView.setAdapter(adapter);
                 break;
             case R.id.linearLayout2:
                 tv_bg_01.setBackgroundResource(R.color.white);
@@ -193,6 +248,11 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener{
                 tv_bg_06.setBackgroundResource(R.color.white);
                 tv_bg_07.setBackgroundResource(R.color.white);
 
+                day = getTempDay(4);
+                MM = tv2_number.getText().toString();
+                scheduleTempList = doscheduleList(tv2_number.getText().toString());
+                adapter = new ScheduleAdapter(getActivity(),StringList,scheduleTempList);
+                listView.setAdapter(adapter);
                 break;
             case R.id.linearLayout3:
                 tv_bg_01.setBackgroundResource(R.color.white);
@@ -203,6 +263,11 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener{
                 tv_bg_06.setBackgroundResource(R.color.white);
                 tv_bg_07.setBackgroundResource(R.color.white);
 
+                day = getTempDay(5);
+                MM = tv3_number.getText().toString();
+                scheduleTempList = doscheduleList(tv3_number.getText().toString());
+                adapter = new ScheduleAdapter(getActivity(),StringList,scheduleTempList);
+                listView.setAdapter(adapter);
                 break;
             case R.id.linearLayout4:
                 tv_bg_01.setBackgroundResource(R.color.white);
@@ -213,6 +278,11 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener{
                 tv_bg_06.setBackgroundResource(R.color.white);
                 tv_bg_07.setBackgroundResource(R.color.white);
 
+                day = getTempDay(6);
+                MM = tv4_number.getText().toString();
+                scheduleTempList = doscheduleList(tv4_number.getText().toString());
+                adapter = new ScheduleAdapter(getActivity(),StringList,scheduleTempList);
+                listView.setAdapter(adapter);
                 break;
             case R.id.linearLayout5:
                 tv_bg_01.setBackgroundResource(R.color.white);
@@ -223,6 +293,11 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener{
                 tv_bg_06.setBackgroundResource(R.color.white);
                 tv_bg_07.setBackgroundResource(R.color.white);
 
+                day = getTempDay(7);
+                MM = tv5_number.getText().toString();
+                scheduleTempList = doscheduleList(tv5_number.getText().toString());
+                adapter = new ScheduleAdapter(getActivity(),StringList,scheduleTempList);
+                listView.setAdapter(adapter);
                 break;
             case R.id.linearLayout6:
                 tv_bg_01.setBackgroundResource(R.color.white);
@@ -233,6 +308,11 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener{
                 tv_bg_06.setBackgroundResource(R.color.list_text_select_color);
                 tv_bg_07.setBackgroundResource(R.color.white);
 
+                day = getTempDay(8);
+                MM = tv6_number.getText().toString();
+                scheduleTempList = doscheduleList(tv6_number.getText().toString());
+                adapter = new ScheduleAdapter(getActivity(),StringList,scheduleTempList);
+                listView.setAdapter(adapter);
                 break;
             case R.id.linearLayout7:
                 tv_bg_01.setBackgroundResource(R.color.white);
@@ -243,11 +323,145 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener{
                 tv_bg_06.setBackgroundResource(R.color.white);
                 tv_bg_07.setBackgroundResource(R.color.list_text_select_color);
 
+                day = getTempDay(9);
+                MM = tv7_number.getText().toString();
+                scheduleTempList = doscheduleList(tv7_number.getText().toString());
+                adapter = new ScheduleAdapter(getActivity(),StringList,scheduleTempList);
+                listView.setAdapter(adapter);
+                break;
+            case R.id.btn_confirm://提交课表
+                String time_solt = "";
+                for(int i=0;i<adapter.time_solt.size();i++){
+                    time_solt = time_solt + adapter.time_solt.get(i) + ",";
+                }
+                //处理最后逗号
+                if(time_solt.length() != 0){
+                    time_solt = time_solt.substring(0,time_solt.length()-1);
+                }
+                dialog = ProgressDialog.show(getActivity(), null, "请求中...");
+                getSubmitTimetable(userInfo.getResult().getPid(),userInfo.getResult().getToken(),day,time_solt,Urls.coachApplyCourseAgain);
+                adapter.time_solt.clear();
                 break;
         }
     }
 
+    //教练排课
+    private void getData(String pid,String url) {
+        Log.i("百信学车","课表参数" + "pid=" + pid + "   url=" + url);
+        OkHttpUtils
+                .post()
+                .url(url)
+                .addParams("pid", pid)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int i) {
+                        //dialog.dismiss();
+                        Toast.makeText(getActivity(), "加载失败", Toast.LENGTH_LONG).show();
+                    }
+                    @Override
+                    public void onResponse(String s, int i) {
+                        //dialog.dismiss();
+                        Log.i("百信学车","课表结果" + s);
+                        Gson gson = new Gson();
 
+                        ScheduleResult scheduleResult = gson.fromJson(s,ScheduleResult.class);
+                        scheduleList = scheduleResult.getResult();
 
+                        GetscheduleList();
+                        scheduleTempList = doscheduleList(tv1_number.getText().toString());
+                        adapter = new ScheduleAdapter(getActivity(),StringList,scheduleTempList);
+                        listView.setAdapter(adapter);
+                    }
+                });
+    }
+
+    //教练排课
+    private void getUpData(String pid,String url) {
+        Log.i("百信学车","课表参数" + "pid=" + pid + "   url=" + url);
+        OkHttpUtils
+                .post()
+                .url(url)
+                .addParams("pid", pid)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int i) {
+                        Toast.makeText(getActivity(), "加载失败", Toast.LENGTH_LONG).show();
+                    }
+                    @Override
+                    public void onResponse(String s, int i) {
+                        Log.i("百信学车","课表结果" + s);
+                        Gson gson = new Gson();
+
+                        ScheduleResult scheduleResult = gson.fromJson(s,ScheduleResult.class);
+                        scheduleList = scheduleResult.getResult();
+
+                        scheduleTempList.clear();
+                        scheduleTempList = doscheduleList(MM);
+                        adapter = new ScheduleAdapter(getActivity(),StringList,scheduleTempList);
+                        listView.setAdapter(adapter);
+                    }
+                });
+    }
+
+    //教练提交课表
+    private void getSubmitTimetable(String pid,String token,String day,String time_slot,String url) {
+        Log.i("百信学车","提交课表参数" + "pid=" + pid + "   token=" + token + "   day=" + day + "   time_slot=" + time_slot + "   url=" + url);
+        OkHttpUtils
+                .post()
+                .url(url)
+                .addParams("pid", pid)
+                .addParams("token", token)
+                .addParams("day", day)
+                .addParams("time_slot", time_slot)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int i) {
+                        dialog.dismiss();
+                        Toast.makeText(getActivity(), "加载失败", Toast.LENGTH_LONG).show();
+                    }
+                    @Override
+                    public void onResponse(String s, int i) {
+                        dialog.dismiss();
+                        Log.i("百信学车","提交课表结果" + s);
+                        Gson gson = new Gson();
+                        BaseEntity baseEntity = gson.fromJson(s, BaseEntity.class);
+                        if (baseEntity.getCode() == 200) {
+                            Toast.makeText(getActivity(), "排课成功", Toast.LENGTH_LONG).show();
+                            getUpData(userInfo.getResult().getPid(), Urls.makeCourse);
+                        }else{
+                            Toast.makeText(getActivity(), baseEntity.getReason(), Toast.LENGTH_LONG).show();
+                        }
+
+                    }
+                });
+    }
+
+    public void GetscheduleList(){
+        StringList.add("08:00-10:00");
+        StringList.add("10:00-12:00");
+        StringList.add("13:30-15:30");
+        StringList.add("15:30-17:30");
+        StringList.add("19:00-21:00");
+    }
+
+    //获取点击日期所对应的数据
+    public List<ScheduleEntity> doscheduleList(String day){
+        List<ScheduleEntity> list = new ArrayList<>();
+        for (ScheduleEntity subject: scheduleList) {
+            if(subString(subject.getDay()).equals(day)){
+                list.add(subject);
+            }
+        }
+        return list;
+    }
+
+    //截取字符串
+    public String subString(String str){
+        int length = str.length();
+        return str.substring(length-3,length-1);
+    }
 
 }

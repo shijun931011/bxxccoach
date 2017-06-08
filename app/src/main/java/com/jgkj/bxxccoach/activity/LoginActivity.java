@@ -43,7 +43,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     private TextView changePwd_id;
     private TextView callback;
     private ProgressDialog dialog;
-    private String loginUrl = "http://www.baixinxueche.com/index.php/Home/Apicoachtoken/coachLogin";
+    private String loginUrl = "http://www.baixinxueche.com/index.php/Home/Apicoachtoken/coachLoginAndroid";
     private UserInfo userInfo;
     private static final String TAG = "JPush";
 

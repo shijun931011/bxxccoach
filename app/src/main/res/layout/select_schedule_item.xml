@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linear"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="40dp"
-    android:gravity="center_vertical"
+    android:minHeight="45dp"
+    android:background="#ffffff"
     android:orientation="vertical">
 <LinearLayout
+    android:layout_marginLeft="20dp"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="44.9dp"
     android:gravity="center_vertical"
     android:orientation="horizontal">
     <CheckBox
@@ -21,18 +23,17 @@
         android:layout_marginLeft="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="A套餐"
-        android:textColor="#777777"
+        android:text="8:00-10:00"
         android:textSize="14sp">
     </TextView>
 
 </LinearLayout>
 
     <View
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="40dp"
+        android:id="@+id/view"
+        android:layout_marginLeft="68dp"
         android:layout_width="match_parent"
         android:background="#777777"
-        android:layout_height="0.5dp">
+        android:layout_height="0.1dp">
     </View>
 </LinearLayout>

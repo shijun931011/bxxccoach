@@ -1,16 +1,22 @@
 package com.jgkj.bxxccoach.activity;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.jgkj.bxxccoach.R;
+import com.jgkj.bxxccoach.bean.UserInfo;
 import com.jgkj.bxxccoach.fragment.BxxcFragment;
 import com.jgkj.bxxccoach.fragment.PersonalFragment;
 import com.jgkj.bxxccoach.fragment.ScheduleFragment;
@@ -32,6 +38,10 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
     private TextView mtabScheduleTxt;
     private TextView mtabPersonalTxt;
     private TextView title;
+
+    private Button button_forward;
+    private UserInfo userInfo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +86,7 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
         mtabPersonalTxt = (TextView) findViewById(R.id.tab_personal_txt);
         mviewPager = (ViewPager) findViewById(R.id.viewPager);
         title = ((TextView) findViewById(R.id.text_title));
+        button_forward = (Button)findViewById(R.id.button_forward);
 
         //初始化三个Tab对应的Fragment
         mfragments = new ArrayList<Fragment>();
@@ -136,13 +147,35 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
                 mtabBxxcImg.setImageResource(R.drawable.main_selected);
                 mtabBxxcTxt.setTextColor(this.getResources().getColor(R.color.themeColor));
                 title.setText("首页");
+                button_forward.setVisibility(View.GONE);
                 break;
             case 1:
                 mtabScheduleImg.setImageResource(R.drawable.class_selected);
                 mtabScheduleTxt.setTextColor(this.getResources().getColor(R.color.themeColor));
                 title.setText("我的课表");
+
+                SharedPreferences sp = getSharedPreferences("Coach", Activity.MODE_PRIVATE);
+                String str = sp.getString("CoachInfo", null);
+                Gson gson = new Gson();
+                userInfo = gson.fromJson(str,UserInfo.class);
+                if(userInfo.getResult().getClass_type().equals("私教班") || userInfo.getResult().getClass_type().equals("陪练")){
+                    button_forward.setVisibility(View.GONE);
+                }else{
+                    button_forward.setVisibility(View.VISIBLE);
+                    button_forward.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent();
+                            intent.setClass(getApplicationContext(),StuAmountActivity.class);
+                            intent.putExtra("maxNum",userInfo.getResult().getMaxnum());
+                            intent.putExtra("token",userInfo.getResult().getToken());
+                            startActivity(intent);
+                        }
+                    });
+                }
                 break;
             case 2:
+                button_forward.setVisibility(View.GONE);
                 mtabPersonalImg.setImageResource(R.drawable.me_selected);
                 mtabPersonalTxt.setTextColor(this.getResources().getColor(R.color.themeColor));
                 title.setText("教练");

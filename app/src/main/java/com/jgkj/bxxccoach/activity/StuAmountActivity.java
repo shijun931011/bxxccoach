@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,6 +45,7 @@ public class StuAmountActivity extends Activity implements View.OnClickListener 
     private String maxNum;
     private String token;
     private String changeMaxUrl = "http://www.baixinxueche.com/index.php/Home/Apicoachtoken/modifyMaxnum";
+    private UserInfo userInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +84,12 @@ public class StuAmountActivity extends Activity implements View.OnClickListener 
         maxNum = intent.getStringExtra("maxNum");
         token = intent.getStringExtra("token");
         text_amount.setText(maxNum);
+
+        SharedPreferences sp = getSharedPreferences("max", Activity.MODE_PRIVATE);
+        String str = sp.getString("max", null);
+       if(str != null){
+           text_amount.setText(str);
+       }
 
         title.setText("学员设置");
         back.setOnClickListener(this);
@@ -123,6 +131,7 @@ public class StuAmountActivity extends Activity implements View.OnClickListener 
      * 修改最大人数上限
      */
     private void changeMax(String maxnum) {
+        Log.i("百信学车","修改人数参数" + "pid=" + user.getResult().getPid() + "   token=" + token + "   maxnum=" + maxnum + "   url=" + changeMaxUrl);
         OkHttpUtils
                 .post()
                 .url(changeMaxUrl)
@@ -134,14 +143,24 @@ public class StuAmountActivity extends Activity implements View.OnClickListener 
                     @Override
                     public void onError(Call call, Exception e, int i) {
                         dialog.dismiss();
-                        Toast.makeText(StuAmountActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(StuAmountActivity.this, "修改失败", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onResponse(String s, int i) {
+                        Log.i("百信学车","修改人数结果" + s);
                         Gson gson = new Gson();
                         NoResultAction res = gson.fromJson(s, NoResultAction.class);
-                        Toast.makeText(StuAmountActivity.this, res.getReason(), Toast.LENGTH_SHORT).show();
+                        if(res.getCode() == 200){
+                            Toast.makeText(StuAmountActivity.this, "设置成功", Toast.LENGTH_SHORT).show();
+
+                            SharedPreferences sp1 = getSharedPreferences("max",Activity.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sp1.edit();
+                            editor.putString("max",text_amount.getText().toString());
+                            editor.commit();
+                        }else{
+                            Toast.makeText(StuAmountActivity.this, "设置的学员数量和上一次相同", Toast.LENGTH_SHORT).show();
+                        }
                         dialog.dismiss();
                     }
                 });

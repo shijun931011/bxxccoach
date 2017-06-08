@@ -2,23 +2,101 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:padding="10dp"
               android:orientation="horizontal">
-    <ImageView android:layout_width="30dp"
-               android:layout_height="30dp"
-               android:id="@+id/money_img"
-               android:layout_gravity="center_vertical"
-               android:layout_weight="1"
-               android:src="@drawable/moneyin"/>
-    <TextView android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_weight="3"
-              android:layout_gravity="center_vertical"
-              android:hint="2017年1月4日\u3000\u3000张三"/>
-    <TextView android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_weight="2"
-              android:id="@+id/money_count"
-              android:layout_gravity="center"
-              android:text="+400"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/linearlayout_shape_background">
+    <TextView
+        android:id="@+id/income_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="2017年06月03日"
+        android:gravity="center"
+    />
+    <View android:layout_width="match_parent"
+          android:layout_height="0.1dp"
+          android:background="@color/background"
+    />
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:padding="5dp"
+                  android:orientation="horizontal">
+        <TextView
+            android:id="@+id/stu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="学员"
+        />
+        <TextView
+            android:id="@+id/stu_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="韩超"
+        />
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:padding="5dp"
+                  android:orientation="horizontal">
+        <TextView
+            android:id="@+id/state_txt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="状态"
+        />
+        <TextView
+            android:id="@+id/state"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="报名成功"
+        />
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:padding="5dp"
+                  android:orientation="horizontal">
+        <TextView
+            android:id="@+id/study_time_txt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="状态"
+        />
+        <TextView
+            android:id="@+id/study_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="08:00-10:00"
+        />
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:padding="5dp"
+                  android:orientation="horizontal">
+        <TextView
+            android:id="@+id/class_txt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="学时费"
+        />
+        <TextView
+            android:id="@+id/class_fee"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="90.00"
+        />
+    </LinearLayout>
+    </LinearLayout>
+
 </LinearLayout>

@@ -1,8 +1,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:background="@color/white"
-             android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white"
+              android:orientation="vertical"
+              android:weightSum="1">
     <!-- ViewPage轮播图设置 -->
     <RelativeLayout
         android:layout_width="match_parent"
@@ -49,5 +50,79 @@
             android:text="科技改变生活，百信引领学车!科技改变生活，百信引领学车!科技改变生活，百信引领学车!科
 技改变生活，百信引领学车!科技改变生活，百信引领学车!"/>
     </LinearLayout>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="20dp"
+                  android:layout_marginLeft="10dp"
+                  android:layout_marginRight="10dp"
+                  android:orientation="horizontal">
+        <TextView
+            android:id="@+id/about_car"
+            android:layout_width="187dp"
+            android:layout_height="wrap_content"
+            android:text="约车学员"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:padding="5dp"
+            android:background="#d95f5f"
+
+        />
+        <TextView
+            android:id="@+id/evaluate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="学员评价"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:layout_marginLeft="10dp"
+            android:background="#d95f5f"
+            android:padding="5dp"
+        />
+    </LinearLayout>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="20dp"
+                  android:layout_marginLeft="10dp"
+                  android:layout_marginRight="10dp"
+                  android:orientation="horizontal">
+        <TextView
+            android:id="@+id/sure_about_car"
+            android:layout_width="187dp"
+            android:layout_height="wrap_content"
+            android:text="确定约车"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:padding="5dp"
+            android:background="#d95f5f"
+        />
+        <TextView
+            android:id="@+id/kefu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="联系客服"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:padding="5dp"
+            android:layout_marginLeft="10dp"
+            android:background="#d95f5f"
+        />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/myAccount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="我的账户"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:padding="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#d9c0c0"
+    />
+
 
 </LinearLayout>

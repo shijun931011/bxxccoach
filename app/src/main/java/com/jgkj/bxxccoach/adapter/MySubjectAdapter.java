@@ -1,7 +1,6 @@
 package com.jgkj.bxxccoach.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +12,8 @@ import com.jgkj.bxxccoach.R;
 import com.jgkj.bxxccoach.bean.SubjectDetail;
 import com.jgkj.bxxccoach.tools.CountListView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -66,7 +67,8 @@ public class MySubjectAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) view.getTag();
         }
         res = list.get(i);
-        viewHolder.day_time.setText(res.getTime());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
+        viewHolder.day_time.setText(sdf.format(new Date())+res.getTime());
         viewHolder.listView.setTag(res.getRes());
         MySubjectListViewAdapter adapter = new MySubjectListViewAdapter(context,pid,
                 (List<SubjectDetail.Result.Res>) viewHolder.listView.getTag(),dayTime,

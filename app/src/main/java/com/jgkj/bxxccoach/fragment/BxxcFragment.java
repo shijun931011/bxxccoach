@@ -14,17 +14,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.jgkj.bxxccoach.R;
 import com.jgkj.bxxccoach.activity.HeadlinesActivity;
+import com.jgkj.bxxccoach.activity.MyAccountActivity;
+import com.jgkj.bxxccoach.activity.MySubjectActivity;
+import com.jgkj.bxxccoach.activity.MyTraineeActivity;
+import com.jgkj.bxxccoach.activity.StuAppraiseActivity;
 import com.jgkj.bxxccoach.activity.WebViewActivity;
 import com.jgkj.bxxccoach.adapter.MyAdapter;
 import com.jgkj.bxxccoach.bean.BannerResult;
 import com.jgkj.bxxccoach.bean.HeadlinesAction;
+import com.jgkj.bxxccoach.bean.UserInfo;
 import com.jgkj.bxxccoach.tools.AutoTextView;
+import com.jgkj.bxxccoach.tools.CallDialog;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -42,17 +49,25 @@ public class BxxcFragment extends Fragment implements View.OnClickListener{
     private ImageView bxhead;
     private HeadlinesAction action;
     private List<HeadlinesAction.Result> headlinesList;
-
+    private TextView aboutcar;
+    private TextView evaluate;
+    private TextView sure_about_car;
+    private TextView MyAccount;
+    private TextView kefu;
     private ImageView imageView;
     private MyAdapter adapter;
     private ViewPager viewpager;
     private LinearLayout.LayoutParams wrapParams;
     private LinearLayout linearlayout;
     private int currentItem = 0;
+    private SharedPreferences.Editor editor;
     private Timer timer = new Timer();
     private Runnable runnable;
     private int headlinesCount = 0;
     private Handler handler = new Handler();
+    private UserInfo user;
+    private UserInfo.Result userInfo;
+    private String token;
     //图片地址
     private String Bannerurl = "http://www.baixinxueche.com/index.php/Home/Apitoken/bannerpics";
     private String headlinesUrl = "http://www.baixinxueche.com/index.php/Home/Apitoken/nowLinesTitleAndroid";
@@ -65,7 +80,18 @@ public class BxxcFragment extends Fragment implements View.OnClickListener{
         getImage();
         getheadlines();
         headlinesList = new ArrayList<HeadlinesAction.Result>();
+        getData();
         return view;
+    }
+
+    private void getData(){
+        SharedPreferences sp = getActivity().getSharedPreferences("Coach", Activity.MODE_PRIVATE);
+        SharedPreferences sp1 = getActivity().getSharedPreferences("CoachToken", Activity.MODE_PRIVATE);
+        token = sp1.getString("CoachToken", null);
+        editor = sp.edit();
+        Gson gson = new Gson();
+        user = gson.fromJson(sp.getString("CoachInfo", null), UserInfo.class);
+        userInfo = user.getResult();
     }
 
     private void initView(){
@@ -75,9 +101,19 @@ public class BxxcFragment extends Fragment implements View.OnClickListener{
         bxhead = (ImageView) view.findViewById(R.id.bxhead);
         viewpager = (ViewPager) view.findViewById(R.id.viewPage);
         linearlayout = (LinearLayout) view.findViewById(R.id.linearlayout);
+        aboutcar = (TextView) view.findViewById(R.id.about_car);
+        evaluate = (TextView) view.findViewById(R.id.evaluate);
+        sure_about_car = (TextView) view.findViewById(R.id.sure_about_car);
+        kefu = (TextView) view.findViewById(R.id.kefu);
+        MyAccount = (TextView) view.findViewById(R.id.myAccount);
+        MyAccount.setOnClickListener(this);
         headlines.setOnClickListener(this);
         headlines.setText("科技改变生活，百信引领学车!");
         bxhead.setOnClickListener(this);
+        aboutcar.setOnClickListener(this);
+        evaluate.setOnClickListener(this);
+        sure_about_car.setOnClickListener(this);
+        kefu.setOnClickListener(this);
     }
     /**
      * 百信头条轮播文字
@@ -235,6 +271,31 @@ public class BxxcFragment extends Fragment implements View.OnClickListener{
                 bxheadIntent.setClass(getActivity(), HeadlinesActivity.class);
                 startActivity(bxheadIntent);
                 break;
+            case R.id.about_car:
+                intent.setClass(getActivity(), MyTraineeActivity.class);
+                startActivity(intent);
+
+            case R.id.evaluate:
+                intent.setClass(getActivity(), StuAppraiseActivity.class);
+                intent.putExtra("pid", userInfo.getPid());
+                startActivity(intent);
+
+            case R.id.sure_about_car:
+                intent.setClass(getActivity(), MySubjectActivity.class);
+                intent.putExtra("pid", userInfo.getPid());
+                intent.putExtra("token", token);
+                startActivity(intent);
+                break;
+            case R.id.kefu:
+                new CallDialog(getActivity(), "0551-65555744").call();
+                break;
+            case R.id.myAccount:
+                intent.setClass(getActivity(), MyAccountActivity.class);
+                intent.putExtra("pid", userInfo.getPid());
+                intent.putExtra("token", token);
+                startActivity(intent);
+                break;
+
         }
     }
 }

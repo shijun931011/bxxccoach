@@ -1,7 +1,6 @@
 package com.jgkj.bxxccoach.adapter;
 
 import android.content.Context;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,7 +76,7 @@ public class StuAppraiseAdapter extends BaseAdapter {
 
         for (int j = 0; j < teachnum; j++) {
             ImageView image = new ImageView(context);
-            image.setBackgroundResource(R.drawable.xin_1);
+            image.setBackgroundResource(R.drawable.star1);
             wrapParams = new LinearLayout.LayoutParams(25,25);
             image.setLayoutParams(wrapParams);
             viewHolder.teach.addView(image);
@@ -90,7 +89,7 @@ public class StuAppraiseAdapter extends BaseAdapter {
         }
         for (int j = 0; j < waitnum; j++) {
             ImageView image = new ImageView(context);
-            image.setBackgroundResource(R.drawable.xin_1);
+            image.setBackgroundResource(R.drawable.star1);
             wrapParams = new LinearLayout.LayoutParams(25,25);
             image.setLayoutParams(wrapParams);
             viewHolder.wait.addView(image);

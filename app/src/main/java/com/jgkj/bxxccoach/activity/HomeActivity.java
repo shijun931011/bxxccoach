@@ -161,6 +161,7 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
                 if(userInfo.getResult().getClass_type().equals("私教班") || userInfo.getResult().getClass_type().equals("陪练")){
                     button_forward.setVisibility(View.GONE);
                 }else{
+                    button_forward.setText("设置");
                     button_forward.setVisibility(View.VISIBLE);
                     button_forward.setOnClickListener(new View.OnClickListener() {
                         @Override

@@ -57,13 +57,13 @@ public class PersonalFragment extends Fragment implements View.OnClickListener{
         String strResult = sp.getString("CoachInfo", null);
         Gson gson = new Gson();
         userInfo = gson.fromJson(strResult,UserInfo.class);
-        String path = userInfo.getResult().getCoafile();
-        if (!path.endsWith(".jpg") && !path.endsWith(".jpeg") && !path.endsWith(".png") &&
-                !path.endsWith(".GIF") && !path.endsWith(".PNG") && !path.endsWith(".JPG") && !path.endsWith(".gif")) {
-            Glide.with(this).load("http://www.baixinxueche.com/Public/Home/img/default.png").into(head);
-        } else {
-            Glide.with(this).load(path).placeholder(R.drawable.defaultimg).error(R.drawable.defaultimg).into(head);
-        }
+        String path = userInfo.getResult().getCoafile().toString();
+//        if (!path.endsWith(".jpg") && !path.endsWith(".jpeg") && !path.endsWith(".png") &&
+//                !path.endsWith(".GIF") && !path.endsWith(".PNG") && !path.endsWith(".JPG") && !path.endsWith(".gif")) {
+//            Glide.with(this).load("http://www.baixinxueche.com/Public/Home/img/default.png").into(head);
+//        } else {
+            Glide.with(this).load(path).error(R.drawable.defaultimg).into(head);
+//        }
         tv_name.setText(userInfo.getResult().getCname());
 
         linear_management_credit = (LinearLayout)view.findViewById(R.id.linear_management_credit);

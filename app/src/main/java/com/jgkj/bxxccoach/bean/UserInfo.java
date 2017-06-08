@@ -41,20 +41,24 @@ public class UserInfo {
          */
         private String pid;
         /**
-         * class
+         * class_type
          */
         private String class_type;
-        /**
-         * name
-         */
-        private String cname;
 
-        public void setMaxnum(String maxnum) {
-            this.maxnum = maxnum;
+        public String getClass_type() {
+            return class_type;
+        }
+
+        public void setClass_type(String class_type) {
+            this.class_type = class_type;
         }
 
         /**
 
+         * name
+         */
+        private String cname;
+        /**
          * 信用
          */
         private String credit;
@@ -82,19 +86,9 @@ public class UserInfo {
          * 头像url
          */
         private String coafile;
-
-        public String getClass_type() {
-            return class_type;
-        }
-
-        public void setClass_type(String class_type) {
-            this.class_type = class_type;
-        }
-
         /**
          * 当前学员数
          */
-
         private String nowStuNum;
         /**
          * 累计学员数

@@ -38,6 +38,7 @@
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.GET_TASKS"/>
 
+
     <application
         android:name=".tools.MyApplication"
         android:allowBackup="true"
@@ -199,6 +200,19 @@
         <activity
             android:name=".activity.ManagementCreditActivity"
             android:screenOrientation="portrait" />
+
+        <!--约车学员页面-->
+        <activity
+            android:name=".activity.MyTraineeActivity"
+            android:screenOrientation="portrait" />
     </application>
+
+    <!--设置获取不同屏幕的权限-->
+    <supports-screens
+        android:smallScreens="true"
+        android:normalScreens="true"
+        android:largeScreens="true"
+        android:resizeable="true"
+        android:anyDensity="true" />
 
 </manifest>

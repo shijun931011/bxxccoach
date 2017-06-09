@@ -61,10 +61,10 @@ public class CleanSaveDialog implements View.OnClickListener{
                 GlideCacheUtil.getInstance().clearImageAllCache(context);
                 String str = GlideCacheUtil.getInstance().getCacheSize(context);
                 tv_clean.setText(str);
-                dialog.hide();
+                dialog.dismiss();
                 break;
             case R.id.dialog_cancel:
-                dialog.hide();
+                dialog.dismiss();
                 break;
 
         }

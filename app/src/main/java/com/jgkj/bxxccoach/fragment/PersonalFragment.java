@@ -94,7 +94,7 @@ public class PersonalFragment extends Fragment implements View.OnClickListener{
                 new CleanSaveDialog(getActivity(),"确定清理缓存吗？",tv_clean).call();
                 break;
             case R.id.linear_quit:
-                new QuitDialog(getActivity(),"确定退出吗？").call();
+                new QuitDialog(getContext(),"确定退出吗？").call();
                 break;
         }
     }

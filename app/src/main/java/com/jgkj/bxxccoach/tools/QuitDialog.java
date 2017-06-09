@@ -68,14 +68,14 @@ public class QuitDialog implements View.OnClickListener{
                 editor = sp.edit();
                 editor.clear();
                 editor.commit();
+                dialog.dismiss();
                 intent.setClass(context, LoginActivity.class);
                 context.startActivity(intent);
                 Activity activity = (Activity) context;
                 activity.finish();
-                dialog.hide();
                 break;
             case R.id.dialog_cancel:
-                dialog.hide();
+                dialog.dismiss();
                 break;
 
         }

@@ -8,12 +8,14 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -72,6 +74,8 @@ public class BxxcFragment extends Fragment implements View.OnClickListener{
     private String Bannerurl = "http://www.baixinxueche.com/index.php/Home/Apitoken/bannerpics";
     private String headlinesUrl = "http://www.baixinxueche.com/index.php/Home/Apitoken/nowLinesTitleAndroid";
 
+    private ImageView imageView1,imageView2,imageView3,imageView4,imageView5;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -95,6 +99,9 @@ public class BxxcFragment extends Fragment implements View.OnClickListener{
     }
 
     private void initView(){
+        //设置首页图片
+        setImageView();
+
         //百信头条
         headlines = (AutoTextView) view.findViewById(R.id.headlines);
         headlines.setTag("nourl");
@@ -114,6 +121,69 @@ public class BxxcFragment extends Fragment implements View.OnClickListener{
         evaluate.setOnClickListener(this);
         sure_about_car.setOnClickListener(this);
         kefu.setOnClickListener(this);
+    }
+
+    //设置首页图片
+    public void setImageView(){
+        imageView1 = (ImageView)view.findViewById(R.id.imageView1);
+        imageView2 = (ImageView)view.findViewById(R.id.imageView2);
+        imageView3 = (ImageView)view.findViewById(R.id.imageView3);
+        imageView4 = (ImageView)view.findViewById(R.id.imageView4);
+        imageView5 = (ImageView)view.findViewById(R.id.imageView5);
+
+        imageView1.setOnClickListener(this);
+        imageView2.setOnClickListener(this);
+        imageView3.setOnClickListener(this);
+        imageView4.setOnClickListener(this);
+        imageView5.setOnClickListener(this);
+
+        DisplayMetrics  dm = new DisplayMetrics();
+        //取得窗口属性
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
+        //窗口的宽度
+        int screenWidth = dm.widthPixels;
+
+        imageView1.setLayoutParams(new LinearLayout.LayoutParams(screenWidth/2-4, screenWidth/2));
+        LinearLayout.LayoutParams lp= (LinearLayout.LayoutParams) imageView1.getLayoutParams();
+        //设置自己需要的距离
+        lp.rightMargin=2;
+        lp.leftMargin=2;
+        lp.bottomMargin=2;
+        imageView1.setLayoutParams(lp);
+
+        imageView2.setLayoutParams(new LinearLayout.LayoutParams(screenWidth/2-4, screenWidth/2));
+        LinearLayout.LayoutParams lp2= (LinearLayout.LayoutParams) imageView2.getLayoutParams();
+        //设置自己需要的距离
+        lp2.leftMargin=2;
+        lp2.rightMargin=2;
+        lp2.bottomMargin=2;
+        imageView2.setLayoutParams(lp2);
+
+        imageView3.setLayoutParams(new LinearLayout.LayoutParams(screenWidth/2-4, screenWidth/2));
+        LinearLayout.LayoutParams lp3= (LinearLayout.LayoutParams) imageView3.getLayoutParams();
+        //设置自己需要的距离
+        lp3.rightMargin=2;
+        lp3.leftMargin=2;
+        lp3.topMargin=2;
+        imageView3.setLayoutParams(lp3);
+
+        imageView4.setLayoutParams(new LinearLayout.LayoutParams(screenWidth/2-4, screenWidth/2));
+        LinearLayout.LayoutParams lp4= (LinearLayout.LayoutParams) imageView4.getLayoutParams();
+        //设置自己需要的距离
+        lp4.leftMargin=2;
+        lp4.rightMargin=2;
+        lp4.topMargin=2;
+        imageView4.setLayoutParams(lp4);
+
+        imageView5.setLayoutParams(new LinearLayout.LayoutParams(screenWidth/2, screenWidth/2));
+        LinearLayout.LayoutParams lp5= (LinearLayout.LayoutParams) imageView5.getLayoutParams();
+        //设置自己需要的距离
+        lp5.topMargin=2;
+        lp5.bottomMargin=2;
+        lp5.leftMargin=2;
+        lp5.rightMargin=2;
+        imageView5.setLayoutParams(lp5);
+
     }
     /**
      * 百信头条轮播文字
@@ -295,7 +365,30 @@ public class BxxcFragment extends Fragment implements View.OnClickListener{
                 intent.putExtra("token", token);
                 startActivity(intent);
                 break;
-
+            case R.id.imageView1:
+                intent.setClass(getActivity(), MyTraineeActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.imageView2:
+                intent.setClass(getActivity(), StuAppraiseActivity.class);
+                intent.putExtra("pid", userInfo.getPid());
+                startActivity(intent);
+                break;
+            case R.id.imageView3:
+                intent.setClass(getActivity(), MySubjectActivity.class);
+                intent.putExtra("pid", userInfo.getPid());
+                intent.putExtra("token", token);
+                startActivity(intent);
+                break;
+            case R.id.imageView4:
+                new CallDialog(getActivity(), "0551-65555744").call();
+                break;
+            case R.id.imageView5:
+                intent.setClass(getActivity(), MyAccountActivity.class);
+                intent.putExtra("pid", userInfo.getPid());
+                intent.putExtra("token", token);
+                startActivity(intent);
+                break;
         }
     }
 }

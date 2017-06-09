@@ -29,15 +29,27 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/dialog_card_imfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="银行卡："
+                android:textSize="14sp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="10dp"
+            />
+            <TextView
                 android:id="@+id/dialog_textView"
+                android:textSize="12sp"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:lineSpacingMultiplier="1.5"
-                android:paddingBottom="15dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:textSize="15sp" />
+
+            />
 
         </LinearLayout>
 
@@ -63,7 +75,7 @@
             <View
                  android:layout_width="0.1dp"
                  android:layout_height="match_parent"
-                 android:background="#ffd0d0d0"
+                 android:background="@color/gray"
                  android:layout_marginTop="5dp"
                  android:layout_marginBottom="5dp"
             />

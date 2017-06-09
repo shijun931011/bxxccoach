@@ -1,7 +1,10 @@
 package com.jgkj.bxxccoach.activity;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +21,8 @@ import com.jgkj.bxxccoach.adapter.WithDrawRecordAdapter;
 import com.jgkj.bxxccoach.bean.IncomeRecord;
 import com.jgkj.bxxccoach.bean.MyAccountMoney;
 import com.jgkj.bxxccoach.bean.WithDrawRecord;
+import com.jgkj.bxxccoach.tools.RemainBaseDialog;
+import com.jgkj.bxxccoach.tools.WithDrawalDialog;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -44,6 +49,8 @@ public class MyAccountActivity extends Activity implements View.OnClickListener 
     private int pid;
     private String token;
     private int currentPage = 1;
+    private MyAccountMoney.Result result;
+    private List<WithDrawRecord.Result> list;
 
     /**
      * 教练入账明细
@@ -77,7 +84,12 @@ public class MyAccountActivity extends Activity implements View.OnClickListener 
      */
     private String checkBalanceUrl = "http://www.baixinxueche.com/index.php/Home/Apicoachtoken/checkBalance";
 
-
+    //广播接收更新数据
+    protected BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        public void onReceive(Context context, Intent intent) {
+            getMyAccountmoney(pid, token);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,20 +118,13 @@ public class MyAccountActivity extends Activity implements View.OnClickListener 
         Intent intent = getIntent();
         pid = Integer.parseInt(intent.getStringExtra("pid"));
         token = intent.getStringExtra("token");
-        if (pid > 0){
-            getInComeRecoed(pid,token,currentPage+"");
-            getwithdrawalRecord(pid,token,currentPage+"");
-        }else{
-            textView.setVisibility(View.VISIBLE);
-            listView.setVisibility(View.GONE);
-        }
+        getInComeRecoed(pid,token,currentPage+"");
+        getwithdrawalRecord(pid,token,currentPage+"");
     }
 
 
 
-    private void getWithDrawal(){
 
-    }
 
     private void getMyAccountmoney(int pid, String token){
         OkHttpUtils.post()
@@ -138,7 +143,7 @@ public class MyAccountActivity extends Activity implements View.OnClickListener 
                         Gson gson = new Gson();
                         MyAccountMoney myAccountMoney = gson.fromJson(s, MyAccountMoney.class);
                         if (myAccountMoney.getCode() == 200){
-                            MyAccountMoney.Result result = myAccountMoney.getResult();
+                            result = myAccountMoney.getResult();
                             if (result.getTodayMoney().equals("")){
                                 today_go_money.setText("￥" + 0 +"元");
                             }else{
@@ -170,6 +175,7 @@ public class MyAccountActivity extends Activity implements View.OnClickListener 
                     }
                     @Override
                     public void onResponse(String s, int i) {
+                        Log.d("BXXC","入账记录："+s);
                         Gson gson = new Gson();
                         IncomeRecord incomeRecord = gson.fromJson(s, IncomeRecord.class);
                         List<IncomeRecord.Result> list = new ArrayList<IncomeRecord.Result>();
@@ -203,9 +209,10 @@ public class MyAccountActivity extends Activity implements View.OnClickListener 
 
                     @Override
                     public void onResponse(String s, int i) {
+                        Log.d("BXXC","提现记录："+s);
                         Gson gson = new Gson();
                         WithDrawRecord withDrawRecord = gson.fromJson(s, WithDrawRecord.class);
-                        List<WithDrawRecord.Result> list = new ArrayList<WithDrawRecord.Result>();
+                        list = new ArrayList<WithDrawRecord.Result>();
                         if (withDrawRecord.getCode() == 200){
                             List<WithDrawRecord .Result> results = withDrawRecord.getResult();
                             list.addAll(results);
@@ -249,11 +256,24 @@ public class MyAccountActivity extends Activity implements View.OnClickListener 
                 getwithdrawalRecord(pid, token, currentPage+"");
                 break;
             case R.id.btn_withdrawal:
-
+                if (result.getTotalMoney().equals("")){
+                    new RemainBaseDialog(MyAccountActivity.this, "抱歉， " +
+                            "您目前的账户余额为零，暂不支持提现").call();
+                }else{
+                    new WithDrawalDialog(this, "备注：每月25号到30号可以申请提现，申请提现后，将在五个工作日内到账！",pid+"",token,
+                            result.getTotalMoney(),list.get(0).getToAccount()).call();
+                }
                 break;
 
         }
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // 在当前的activity中注册广播
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("updataTianApp");
+        registerReceiver(this.broadcastReceiver, filter);
+    }
 }

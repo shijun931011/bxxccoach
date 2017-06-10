@@ -4,12 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/background"
+    android:background="@drawable/login_bg"
     tools:context=".activity.WelcomeActivity"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://schemas.android.com/tools ">
 
-
+    <ImageView
+        android:id="@+id/login_head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/header_image"
+        android:layout_marginTop="70dp"
+    />
     <LinearLayout
         android:id="@+id/linear_EditText"
         android:layout_width="match_parent"
@@ -23,53 +29,74 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
-            android:alpha="0.8"
-            android:background="@drawable/rounded_num_text"
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/name"/>
+                android:src="@drawable/user_name_img"/>
 
-            <EditText
-                android:id="@+id/coachName"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_gravity="center_horizontal"
-                android:background="@drawable/rounded_num_text"
-                android:hint="@string/phone"
-                android:textColorHint="@color/themeColor"
-                android:textSize="@dimen/hint_text_size"/>
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical">
+                <EditText
+                    android:id="@+id/coachName"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:background="@null"
+                    android:hint="@string/phone"
+                    android:textColorHint="#FFFFFF"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.8dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginTop="3dp"
+                />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
+            android:layout_marginLeft="48dp"
             android:layout_marginRight="50dp"
-            android:layout_marginTop="1dp"
-            android:alpha="0.8"
-            android:background="@drawable/rounded_num_text"
+            android:layout_marginTop="15dp"
             android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/word"/>
-
-            <EditText
-                android:id="@+id/password"
+                android:src="@drawable/password_img"/>
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_gravity="center_horizontal"
-                android:background="@drawable/rounded_num_text"
-                android:hint="@string/password"
-                android:inputType="textPassword"
-                android:textColorHint="@color/themeColor"
-                android:textSize="@dimen/hint_text_size"/>
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical">
+                <EditText
+                    android:id="@+id/password"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:background="@null"
+                    android:hint="@string/password"
+                    android:textColorHint="#FFFFFF"
+                    android:textColor="@color/white"
+                    android:inputType="textPassword"
+                    android:textSize="15sp"
+                />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.8dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginTop="3dp"
+                />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
@@ -77,7 +104,7 @@
         android:layout_below="@+id/linear_EditText"
         android:id="@+id/login_button_id"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="35dp"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:layout_marginTop="15dp"
@@ -103,7 +130,7 @@
             android:layout_gravity="left"
             android:layout_weight="1"
             android:text="@string/register"
-            android:textColor="@color/gray"/>
+            android:textColor="@color/white"/>
 
         <TextView
             android:id="@+id/callback_id"
@@ -112,7 +139,7 @@
             android:layout_weight="1"
             android:gravity="right"
             android:text="@string/callback"
-            android:textColor="@color/gray"/>
+            android:textColor="@color/white"/>
     </LinearLayout>
 
 

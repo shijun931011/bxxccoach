@@ -46,13 +46,14 @@
         <ListView android:id="@+id/appraiseListView"
                   android:layout_width="match_parent"
                   android:layout_height="match_parent"/>
+
     </com.jgkj.bxxccoach.tools.RefreshLayout>
     <TextView android:id="@+id/textView"
               android:text="暂无数据"
-              android:visibility="gone"
               android:gravity="center"
               android:layout_margin="10dp"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content"/>
+              android:layout_height="match_parent"/>
+
 
 </LinearLayout>

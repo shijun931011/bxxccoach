@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,7 +49,7 @@ public class BxxcFragment extends Fragment implements View.OnClickListener{
     private AutoTextView headlines;
     private ImageView bxhead;
     private HeadlinesAction action;
-    private List<HeadlinesAction.Result> headlinesList;
+    private List<HeadlinesAction.Result> headlinesList = new ArrayList<HeadlinesAction.Result>();;
     private TextView aboutcar;
     private TextView evaluate;
     private TextView sure_about_car;
@@ -83,7 +82,6 @@ public class BxxcFragment extends Fragment implements View.OnClickListener{
         initView();
         getImage();
         getheadlines();
-        headlinesList = new ArrayList<HeadlinesAction.Result>();
         getData();
         return view;
     }

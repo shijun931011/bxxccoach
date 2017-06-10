@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -67,14 +68,15 @@ public class StuAppraiseActivity extends Activity implements View.OnClickListene
         back.setOnClickListener(this);
         textView = (TextView) findViewById(R.id.textView);
         listView = (ListView) findViewById(R.id.appraiseListView);
+        listView.setEmptyView(textView);
         medium = (TextView) findViewById(R.id.medium);
         good = (TextView) findViewById(R.id.good);
         bad = (TextView) findViewById(R.id.bad);
         medium.setOnClickListener(this);
         good.setOnClickListener(this);
         bad.setOnClickListener(this);
-
         refresh = (RefreshLayout) findViewById(R.id.appraiseRefresh);
+
         refresh.setTag("isFirst");
         refresh.setColorSchemeResources(R.color.color_bule2, R.color.color_bule, R.color.color_bule2, R.color.color_bule3);
         refresh.setOnRefreshListener(this);
@@ -94,7 +96,7 @@ public class StuAppraiseActivity extends Activity implements View.OnClickListene
         Gson gson = new Gson();
         StuAppraise stu = gson.fromJson(str, StuAppraise.class);
         if (stu.getCode() == 200) {
-            Toast.makeText(StuAppraiseActivity.this, stu.getReason(), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(StuAppraiseActivity.this, stu.getReason(), Toast.LENGTH_SHORT).show();
             list.addAll(stu.getResult());
             if (refresh.getTag().toString().equals("isFirst")) {
                 adapter = new StuAppraiseAdapter(StuAppraiseActivity.this, list);
@@ -106,8 +108,15 @@ public class StuAppraiseActivity extends Activity implements View.OnClickListene
                 adapter.notifyDataSetChanged();
             }
         } else {
-            Toast.makeText(StuAppraiseActivity.this, stu.getReason(), Toast.LENGTH_SHORT).show();
+            if (list.size() == 0){
+                refresh.setVisibility(View.GONE);
+                textView.setVisibility(View.VISIBLE);
+            }
+            adapter = new StuAppraiseAdapter(StuAppraiseActivity.this, list);
+            listView.setAdapter(adapter);
+            Toast.makeText(StuAppraiseActivity.this, "没有更多评论记录", Toast.LENGTH_SHORT).show();
         }
+
     }
 
     @Override
@@ -119,9 +128,9 @@ public class StuAppraiseActivity extends Activity implements View.OnClickListene
             case R.id.good:
                 refresh.setTag("isFirst");
                 refresh.setVisibility(View.VISIBLE);
-                textView.setVisibility(View.GONE);
+
                 list.clear();
-                adapter.notifyDataSetChanged();
+//                adapter.notifyDataSetChanged();
                 good.setTextColor(getResources().getColor(R.color.colorred));
                 bad.setTextColor(getResources().getColor(R.color.lightblack));
                 medium.setTextColor(getResources().getColor(R.color.lightblack));
@@ -133,10 +142,10 @@ public class StuAppraiseActivity extends Activity implements View.OnClickListene
             case R.id.bad:
                 refresh.setTag("isFirst");
                 refresh.setVisibility(View.VISIBLE);
-                textView.setVisibility(View.GONE);
+
                 currentPage = 1;
                 list.clear();
-                adapter.notifyDataSetChanged();
+//                adapter.notifyDataSetChanged();
                 bad.setTextColor(getResources().getColor(R.color.colorred));
                 good.setTextColor(getResources().getColor(R.color.lightblack));
                 medium.setTextColor(getResources().getColor(R.color.lightblack));
@@ -147,10 +156,11 @@ public class StuAppraiseActivity extends Activity implements View.OnClickListene
             case R.id.medium:
                 refresh.setTag("isFirst");
                 refresh.setVisibility(View.VISIBLE);
-                textView.setVisibility(View.GONE);
+
                 currentPage = 1;
                 list.clear();
-                adapter.notifyDataSetChanged();
+
+//                adapter.notifyDataSetChanged();
                 medium.setTextColor(getResources().getColor(R.color.colorred));
                 bad.setTextColor(getResources().getColor(R.color.lightblack));
                 good.setTextColor(getResources().getColor(R.color.lightblack));
@@ -181,6 +191,7 @@ public class StuAppraiseActivity extends Activity implements View.OnClickListene
 
                     @Override
                     public void onResponse(String s, int i) {
+                        Log.d("BXXC","学员评价："+s);
                         listView.setTag(s);
                         if (listView.getTag() != null) {
                             getList();

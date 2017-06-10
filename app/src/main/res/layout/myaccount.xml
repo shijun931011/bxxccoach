@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical">
     <include
+        android:id="@+id/title"
         layout="@layout/title"/>
 
     <RelativeLayout
+        android:id="@+id/layout1"
+        android:layout_below="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/themeColor"
-    >
+        android:background="@color/themeColor">
         <LinearLayout
             android:id="@+id/today_money"
             android:layout_width="match_parent"
@@ -18,6 +20,7 @@
             android:orientation="horizontal"
             android:layout_marginTop="10dp"
             android:padding="10dp">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -62,23 +65,15 @@
                 android:textSize="20sp"
                 android:text="100000元"/>
         </LinearLayout>
-        <Button
-            android:id="@+id/btn_withdrawal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_below="@id/total_money"
-            android:background="@drawable/tixian_selector"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:padding="10dp"
-            android:text="申请提现"
-            android:textColor="@color/white"/>
+
     </RelativeLayout>
-    <RadioGroup style="@style/RadioButton"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:orientation="horizontal">
+    <RadioGroup
+        android:id="@+id/radio"
+        style="@style/RadioButton"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_below="@+id/layout1"
+        android:orientation="horizontal">
         <RadioButton
             android:id="@+id/btn_income_record"
             style="@style/RadioButton"
@@ -111,8 +106,8 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:divider="@null"
+              android:layout_below="@id/radio"
     />
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
@@ -123,4 +118,14 @@
         android:textSize="15sp"
         android:visibility="gone"
     />
-</LinearLayout>
+    <Button
+        android:id="@+id/btn_withdrawal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_bule"
+        android:layout_alignParentBottom="true"
+        android:text="申请提现"
+        android:textSize="15sp"
+        android:padding="15dp"
+        android:textColor="@color/white"/>
+</RelativeLayout>

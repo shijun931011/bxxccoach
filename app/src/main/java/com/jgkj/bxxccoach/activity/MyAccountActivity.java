@@ -276,4 +276,10 @@ public class MyAccountActivity extends Activity implements View.OnClickListener 
         filter.addAction("updataTianApp");
         registerReceiver(this.broadcastReceiver, filter);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(this.broadcastReceiver);
+    }
 }

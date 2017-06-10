@@ -98,6 +98,7 @@ public class WithDrawalDialog implements View.OnClickListener{
                         WithDrawalResult withDrawalResult  = gson.fromJson(s, WithDrawalResult.class);
                         if (withDrawalResult.getCode() == 200){
                             Toast.makeText(context, withDrawalResult.getReason(), Toast.LENGTH_SHORT).show();
+
                             updata();
                         }else{
                             Toast.makeText(context,  withDrawalResult.getReason(), Toast.LENGTH_SHORT).show();

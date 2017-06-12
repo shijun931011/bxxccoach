@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.jgkj.bxxccoach.activity.HomeActivity;
 import com.jgkj.bxxccoach.activity.MainActivity;
 import com.jgkj.bxxccoach.activity.MySubjectActivity;
 import com.jgkj.bxxccoach.bean.UserInfo;
@@ -93,7 +94,7 @@ public class JPushDataReceiver extends BroadcastReceiver {
             try {
                 jsonObject = new JSONObject(type);
                 String str = jsonObject.getString("type");
-                Intent mainIntent = new Intent(context, MainActivity.class);
+                Intent mainIntent = new Intent(context, HomeActivity.class);
                 //将MainAtivity的launchMode设置成SingleTask, 或者在下面flag中加上Intent.FLAG_CLEAR_TOP,
                 //如果Task栈中有MainActivity的实例，就会把它移到栈顶，把在它之上的Activity都清理出栈，
                 //如果Task栈不存在MainActivity实例，则在栈顶创建
@@ -107,7 +108,7 @@ public class JPushDataReceiver extends BroadcastReceiver {
                     Intent[] intents = {mainIntent, i};
                     context.startActivities(intents);
                 }else{
-                    i.setClass(context, MainActivity.class);
+                    i.setClass(context, HomeActivity.class);
                     i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     context.startActivity(i);
                 }
@@ -115,7 +116,7 @@ public class JPushDataReceiver extends BroadcastReceiver {
                 e.printStackTrace();
                 Log.i(TAG,"跳转信息错误");
                 Intent i = new Intent();
-                i.setClass(context, MainActivity.class);
+                i.setClass(context, HomeActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 context.startActivity(i);
             }
@@ -165,16 +166,16 @@ public class JPushDataReceiver extends BroadcastReceiver {
 
     //send msg to MainActivity
     private void processCustomMessage(Context context, Bundle bundle) {
-        if (MainActivity.isForeground) {
+        if (HomeActivity.isForeground) {
             String message = bundle.getString(JPushInterface.EXTRA_MESSAGE);
             String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
-            Intent msgIntent = new Intent(MainActivity.MESSAGE_RECEIVED_ACTION);
-            msgIntent.putExtra(MainActivity.KEY_MESSAGE, message);
+            Intent msgIntent = new Intent(HomeActivity.MESSAGE_RECEIVED_ACTION);
+            msgIntent.putExtra(HomeActivity.KEY_MESSAGE, message);
             if (!JPushDataUitl.isEmpty(extras)) {
                 try {
                     JSONObject extraJson = new JSONObject(extras);
                     if (null != extraJson && extraJson.length() > 0) {
-                        msgIntent.putExtra(MainActivity.KEY_EXTRAS, extras);
+                        msgIntent.putExtra(HomeActivity.KEY_EXTRAS, extras);
                     }
                 } catch (JSONException e) {
 

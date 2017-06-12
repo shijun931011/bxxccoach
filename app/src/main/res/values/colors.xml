@@ -3,7 +3,7 @@
     <color name="black">#000000</color>
     <color name="active">#1f1f1f</color>
     <color name="unactive">#dddddd</color>
-    <color name="gray">#666666</color>
+    <color name="gray">#a4a3a3</color>
     <color name="darkgray">#555555</color>
     <color name="red">#E4393C</color>
     <color name="blue">#0000ff</color>
@@ -21,7 +21,7 @@
     <color name="redTheme">#E4393C</color>
     <color name="right_bg">#696969</color>
     <color name="blur_bg">#FFFAF0</color>
-    <color name="color_bule">#2F9BFF</color>
+    <color name="color_bule">#3eb0ed</color>
     <color name="color_bule2">#40B3F0</color>
     <color name="color_bule3">#99ddff</color>
     <color name="transparent">#00000000</color>

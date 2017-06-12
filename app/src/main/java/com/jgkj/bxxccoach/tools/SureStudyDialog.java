@@ -85,10 +85,10 @@ public class SureStudyDialog implements View.OnClickListener{
             case R.id.dialog_sure:
                 proDialog = ProgressDialog.show(context, null, "提交中,请耐心等待...");
                 saveTime();
-                dialog.hide();
+                dialog.dismiss();
                 break;
             case R.id.dialog_cancel:
-                dialog.hide();
+                dialog.dismiss();
                 break;
         }
     }

@@ -5,8 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.jgkj.bxxccoach.R;
 import com.jgkj.bxxccoach.bean.StuRecord;
 
@@ -21,11 +23,13 @@ public class LearnRecordAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private StuRecord.Result stuRecord;
     private List<StuRecord.Result> list;
+    private String file;
 
-    public LearnRecordAdapter(Context context,List<StuRecord.Result> list){
+    public LearnRecordAdapter(Context context,List<StuRecord.Result> list,String file){
         this.context = context;
         inflater = LayoutInflater.from(context);
         this.list = list;
+        this.file = file;
     }
     @Override
     public int getCount() {
@@ -51,16 +55,17 @@ public class LearnRecordAdapter extends BaseAdapter {
                     viewGroup, false);
             viewHolder.day_time = (TextView) view.findViewById(R.id.day_time);
             viewHolder.isSuccess = (TextView) view.findViewById(R.id.isSuccess);
-
+            viewHolder.head_img = (ImageView) view.findViewById(R.id.head_img);
             view.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) view.getTag();
         }
         stuRecord = list.get(i);
+        Glide.with(context).load(file).into(viewHolder.head_img);
         viewHolder.day_time.setText(stuRecord.getDay()+" "+stuRecord.getTime_slot());
         if(stuRecord.getStatement().equals("0")){
-            viewHolder.isSuccess.setText("等待学车");
-            viewHolder.isSuccess.setTextColor(context.getResources().getColor(R.color.themeColor));
+            viewHolder.isSuccess.setText("预约成功");
+            viewHolder.isSuccess.setTextColor(context.getResources().getColor(R.color.orange));
         }else if(stuRecord.getStatement().equals("1")){
             viewHolder.isSuccess.setText("已学车");
             viewHolder.isSuccess.setTextColor(context.getResources().getColor(R.color.green));
@@ -74,5 +79,6 @@ public class LearnRecordAdapter extends BaseAdapter {
 
     static class ViewHolder {
         public TextView day_time,isSuccess;
+        public ImageView head_img;
     }
 }

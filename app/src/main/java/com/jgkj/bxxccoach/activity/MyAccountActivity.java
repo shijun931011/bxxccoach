@@ -21,6 +21,7 @@ import com.jgkj.bxxccoach.adapter.WithDrawRecordAdapter;
 import com.jgkj.bxxccoach.bean.IncomeRecord;
 import com.jgkj.bxxccoach.bean.MyAccountMoney;
 import com.jgkj.bxxccoach.bean.WithDrawRecord;
+import com.jgkj.bxxccoach.tools.DashboardView;
 import com.jgkj.bxxccoach.tools.RemainBaseDialog;
 import com.jgkj.bxxccoach.tools.WithDrawalDialog;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -51,6 +52,7 @@ public class MyAccountActivity extends Activity implements View.OnClickListener 
     private int currentPage = 1;
     private MyAccountMoney.Result result;
     private List<WithDrawRecord.Result> list;
+    private DashboardView mDashboardView;
 
     /**
      * 教练入账明细
@@ -111,8 +113,9 @@ public class MyAccountActivity extends Activity implements View.OnClickListener 
         radio_btn02.setOnClickListener(this);
         listView = (ListView) findViewById(R.id.listView);
         textView = (TextView) findViewById(R.id.textView);
+        mDashboardView = (DashboardView) findViewById(R.id.dashboard_view);
         myAccount_money = (TextView) findViewById(R.id.myAccount_money);
-        today_go_money = (TextView) findViewById(R.id.today_go_money);
+//        today_go_money = (TextView) findViewById(R.id.today_go_money);
         btn_withdrawal = (Button) findViewById(R.id.btn_withdrawal);
         btn_withdrawal.setOnClickListener(this);
         Intent intent = getIntent();
@@ -145,9 +148,9 @@ public class MyAccountActivity extends Activity implements View.OnClickListener 
                         if (myAccountMoney.getCode() == 200){
                             result = myAccountMoney.getResult();
                             if (result.getTodayMoney().equals("")){
-                                today_go_money.setText("￥" + 0 +"元");
+                                mDashboardView.setCreditValueWithAnim(0);
                             }else{
-                                today_go_money.setText("￥"+result.getTodayMoney()+"元");
+                                mDashboardView.setCreditValueWithAnim(Integer.parseInt(result.getTodayMoney()));
                             }
                             if (result.getTotalMoney().equals("")){
                                 myAccount_money.setText("￥" + 0 +"元");

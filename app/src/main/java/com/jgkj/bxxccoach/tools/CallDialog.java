@@ -60,10 +60,10 @@ public class CallDialog implements View.OnClickListener{
             case R.id.dialog_sure:
                 Intent call_intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+dialog_textView.getText().toString()));
                 context.startActivity(call_intent);
-                dialog.hide();
+                dialog.dismiss();
                 break;
             case R.id.dialog_cancel:
-                dialog.hide();
+                dialog.dismiss();
                 break;
 
         }

@@ -8,7 +8,6 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.jgkj.bxxccoach.R;
 import com.jgkj.bxxccoach.bean.entity.ScheduleEntity.ScheduleEntity;

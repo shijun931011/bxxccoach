@@ -114,7 +114,7 @@ public class LearnRecordActivity extends Activity implements View.OnClickListene
         stuRecord = gson.fromJson(str,StuRecord.class);
         if(stuRecord.getCode()==200){
             list = stuRecord.getResult();
-            adapter = new LearnRecordAdapter(LearnRecordActivity.this,list);
+            adapter = new LearnRecordAdapter(LearnRecordActivity.this,list,file);
             listView.setAdapter(adapter);
         }else{
             Toast.makeText(LearnRecordActivity.this,stuRecord.getReason(),Toast.LENGTH_SHORT).show();

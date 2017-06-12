@@ -94,8 +94,8 @@ public class MySubjectListViewAdapter extends BaseAdapter {
         res = list.get(i);
         viewHolder.name.setText(res.getName());
         viewHolder.state.setText(res.getState());
-        viewHolder.applyTime.setText(res.getNotify_time().substring(0, 11));
-        viewHolder.phone.setText(res.getPhone());
+        viewHolder.applyTime.setHint(res.getNotify_time().substring(0, 11));
+        viewHolder.phone.setHint(res.getPhone());
         String path = res.getFile();
         if (!path.endsWith(".jpg") && !path.endsWith(".jpeg") && !path.endsWith(".png") &&
                 !path.endsWith(".GIF") && !path.endsWith(".PNG") && !path.endsWith(".JPG") && !path.endsWith(".gif")) {
@@ -106,12 +106,14 @@ public class MySubjectListViewAdapter extends BaseAdapter {
         if (res.getStatement().equals("1")) {
             viewHolder.notCome.setVisibility(View.INVISIBLE);
             viewHolder.sureCome.setEnabled(false);
-            viewHolder.sureCome.setText("已同意");
-            viewHolder.sureCome.setTextColor(context.getResources().getColor(R.color.gray));
+            viewHolder.sureCome.setText("已学车");
+            viewHolder.sureCome.setBackgroundResource(R.drawable.yueche_selector);
+            viewHolder.sureCome.setTextColor(context.getResources().getColor(R.color.white));
         } else if (res.getStatement().equals("2")) {
             viewHolder.notCome.setVisibility(View.INVISIBLE);
             viewHolder.sureCome.setEnabled(false);
-            viewHolder.sureCome.setTextColor(context.getResources().getColor(R.color.gray));
+            viewHolder.sureCome.setTextColor(context.getResources().getColor(R.color.white));
+            viewHolder.sureCome.setBackgroundResource(R.drawable.yueche_selector);
             viewHolder.sureCome.setText("已拒绝");
         }
         viewHolder.notCome.setTag(res.getUid());

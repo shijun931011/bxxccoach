@@ -116,7 +116,7 @@
                         android:background="@drawable/tixian_selector"
                         android:padding="5dp"
                         android:text="联系学员"
-                        android:textColor="@color/themeColor"
+                        android:textColor="@color/white"
                         android:textSize="12sp"/>
             </LinearLayout>
         </LinearLayout>

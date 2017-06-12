@@ -39,7 +39,7 @@ public class MySubjectActivity extends Activity implements View.OnClickListener{
     private MySubjectAdapter adapter;
     private TextView title;
     private Button back;
-    private Button subSet;
+//    private Button subSet;
     private TextView up,next,day;
     private String pid,token;
     private String today;
@@ -83,10 +83,10 @@ public class MySubjectActivity extends Activity implements View.OnClickListener{
         back.setVisibility(View.VISIBLE);
         back.setOnClickListener(this);
         title.setText("我的课程");
-        subSet = (Button) findViewById(R.id.button_forward);
-        subSet.setVisibility(View.VISIBLE);
-        subSet.setText("排课");
-        subSet.setOnClickListener(this);
+//        subSet = (Button) findViewById(R.id.button_forward);
+//        subSet.setVisibility(View.VISIBLE);
+//        subSet.setText("排课");
+//        subSet.setOnClickListener(this);
         listView = (ListView) findViewById(R.id.listView);
     }
 
@@ -98,7 +98,7 @@ public class MySubjectActivity extends Activity implements View.OnClickListener{
         Gson gson = new Gson();
         SubjectDetail sub = gson.fromJson(str,SubjectDetail.class);
         if(sub.getCode()==200){
-            Toast.makeText(MySubjectActivity.this,sub.getReason(),Toast.LENGTH_SHORT).show();
+//            Toast.makeText(MySubjectActivity.this,sub.getReason(),Toast.LENGTH_SHORT).show();
             list.addAll(sub.getResult());
             adapter = new MySubjectAdapter(MySubjectActivity.this,list,today,pid,token);
             listView.setAdapter(adapter);
@@ -156,13 +156,7 @@ public class MySubjectActivity extends Activity implements View.OnClickListener{
                 day.setText(today);
                 getData(pid);
                 break;
-            case R.id.button_forward:
-                Intent intent = new Intent();
-                intent.setClass(MySubjectActivity.this,SetSubjectActivity.class);
-                intent.putExtra("pid",pid);
-                intent.putExtra("token",token);
-                startActivity(intent);
-                break;
+
         }
     }
 

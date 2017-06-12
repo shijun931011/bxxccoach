@@ -107,6 +107,7 @@ public class MyTraineeActivity extends Activity implements View.OnClickListener,
      * 学员获取
      */
     private void getStu(String Url,String page) {
+        Log.d("bxxc","获取页数"+page);
         OkHttpUtils
                 .post()
                 .url(Url)
@@ -157,8 +158,10 @@ public class MyTraineeActivity extends Activity implements View.OnClickListener,
                 break;
             case "ONLOAD":
                 if (stuMsg.getCode() == 200) {
-                    StuMsglist.addAll(stuMsg.getResult());
-                    adapter.notifyDataSetChanged();
+//                    StuMsglist.clear();
+//                    StuMsglist.addAll(stuMsg.getResult());
+//                    adapter.notifyDataSetChanged();
+                    setMyAdapter();
                 } else {
                     Toast.makeText(MyTraineeActivity.this, stuMsg.getReason(), Toast.LENGTH_SHORT).show();
                 }
@@ -181,8 +184,6 @@ public class MyTraineeActivity extends Activity implements View.OnClickListener,
         }
 
     }
-
-
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -208,11 +209,11 @@ public class MyTraineeActivity extends Activity implements View.OnClickListener,
 
     @Override
     public void onLoad() {
+        listView.setVisibility(View.VISIBLE);
+        textView.setVisibility(View.GONE);
         swipeLayout.postDelayed(new Runnable() {
             @Override
             public void run() {
-                listView.setVisibility(View.VISIBLE);
-                textView.setVisibility(View.GONE);
                 currentPage++;
                 getStu(MyTraineeUrl, currentPage+"");
                 swipeLayout.setTag("ONLOAD");
@@ -231,7 +232,7 @@ public class MyTraineeActivity extends Activity implements View.OnClickListener,
                 @Override
                 public void run() {
                     currentPage = 1;
-                    swipeLayout.setTag("ONFRESH");
+                    swipeLayout.setTag("REFRESH");
                     getStu(MyTraineeUrl, currentPage+"");
                     swipeLayout.setRefreshing(false);
                 }

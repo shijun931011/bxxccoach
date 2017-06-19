@@ -69,7 +69,7 @@
                     android:textColor="#ffffff"
                     android:lineSpacingExtra="5dp"
                     android:layout_marginTop="5dp"
-                    android:text="综合评价用来衡量教练的综合素质测评，它的值是由教练在教学过程中所有考核标准累加后计算出来的平均值。要想提高这个值的占比，你必须做到服务态度好、学员通过率高、教学技巧实用性强等，才能获取更高的分数。"/>
+                    android:text="综合评价用来衡量教练的综合素质的考核标准，它的值是由教练在教学过程中，各项考核指标评分累加后计算出来的平均值。要想提高这个值的占比，您必须做到服务态度好、学员通过率高、教学技巧实用性强等，才能获取更高的分数。"/>
 
                 <TextView
                     android:paddingTop="10dp"
@@ -85,7 +85,7 @@
                     android:textColor="#ffffff"
                     android:layout_marginTop="5dp"
                     android:lineSpacingExtra="5dp"
-                    android:text="服务态度是指您在指导学员学车的过程中，在言行举止方面所表现出来的一种神态。服务搞上去了才能吸纳更多的学员哦～"/>
+                    android:text="服务态度是指您在指导学员学车的过程中，在言行举止方面所表现出来的一种神态。要想提高服务态度，您需要做到以下几点：热情、礼貌、微笑服务、使用普通话、责任心强等，只有服务搞上去了才能吸纳更多的学员哦～"/>
 
                 <TextView
                     android:paddingTop="10dp"
@@ -133,7 +133,7 @@
                     android:textColor="#ffffff"
                     android:lineSpacingExtra="5dp"
                     android:layout_marginTop="5dp"
-                    android:text="好评率是学员学车后反馈教练教学的数据。"/>
+                    android:text="好评率数据来源于每日学员学完车后，对您当天教学给予的评价，您可以和学员处理好私下关系来提高这个评分哦～"/>
             </LinearLayout>
 
         </LinearLayout>

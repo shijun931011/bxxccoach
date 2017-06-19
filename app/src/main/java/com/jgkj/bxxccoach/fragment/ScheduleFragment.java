@@ -133,26 +133,26 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener{
         linearLayout6.setOnClickListener(this);
         linearLayout7.setOnClickListener(this);
 
-        //教练排课要提前三天
+        //教练排课
         tv_day = (TextView)view.findViewById(R.id.tv_day);
-        tv_day.setText(getTempDay(3));
+        tv_day.setText(getTempDay(0));
         //设置星期
-        tv1_week.setText(getWeek(3));
-        tv2_week.setText(getWeek(4));
-        tv3_week.setText(getWeek(5));
-        tv4_week.setText(getWeek(6));
-        tv5_week.setText(getWeek(7));
-        tv6_week.setText(getWeek(8));
-        tv7_week.setText(getWeek(9));
+        tv1_week.setText(getWeek(0));
+        tv2_week.setText(getWeek(1));
+        tv3_week.setText(getWeek(2));
+        tv4_week.setText(getWeek(3));
+        tv5_week.setText(getWeek(4));
+        tv6_week.setText(getWeek(5));
+        tv7_week.setText(getWeek(6));
 
         //设置日期号
-        tv1_number.setText(getDay(3));
-        tv2_number.setText(getDay(4));
-        tv3_number.setText(getDay(5));
-        tv4_number.setText(getDay(6));
-        tv5_number.setText(getDay(7));
-        tv6_number.setText(getDay(8));
-        tv7_number.setText(getDay(9));
+        tv1_number.setText(getDay(0));
+        tv2_number.setText(getDay(1));
+        tv3_number.setText(getDay(2));
+        tv4_number.setText(getDay(3));
+        tv5_number.setText(getDay(4));
+        tv6_number.setText(getDay(5));
+        tv7_number.setText(getDay(6));
 
         tv_bg_01.setBackgroundResource(R.color.list_text_select_color);
         tv_bg_02.setBackgroundResource(R.color.white);
@@ -162,8 +162,8 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener{
         tv_bg_06.setBackgroundResource(R.color.white);
         tv_bg_07.setBackgroundResource(R.color.white);
 
-        //day默认为第三天
-        day = getTempDay(3);
+        //day默认为当天
+        day = getTempDay(0);
         MM = tv1_number.getText().toString();
         btn_confirm = (Button)view.findViewById(R.id.btn_confirm);
         btn_confirm.setOnClickListener(this);
@@ -233,7 +233,7 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener{
                 tv_bg_06.setBackgroundResource(R.color.white);
                 tv_bg_07.setBackgroundResource(R.color.white);
 
-                day = getTempDay(3);
+                day = getTempDay(0);
                 MM = tv1_number.getText().toString();
                 scheduleTempList = doscheduleList(tv1_number.getText().toString());
                 adapter = new ScheduleAdapter(getActivity(),StringList,scheduleTempList);
@@ -248,7 +248,7 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener{
                 tv_bg_06.setBackgroundResource(R.color.white);
                 tv_bg_07.setBackgroundResource(R.color.white);
 
-                day = getTempDay(4);
+                day = getTempDay(1);
                 MM = tv2_number.getText().toString();
                 scheduleTempList = doscheduleList(tv2_number.getText().toString());
                 adapter = new ScheduleAdapter(getActivity(),StringList,scheduleTempList);
@@ -263,7 +263,7 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener{
                 tv_bg_06.setBackgroundResource(R.color.white);
                 tv_bg_07.setBackgroundResource(R.color.white);
 
-                day = getTempDay(5);
+                day = getTempDay(2);
                 MM = tv3_number.getText().toString();
                 scheduleTempList = doscheduleList(tv3_number.getText().toString());
                 adapter = new ScheduleAdapter(getActivity(),StringList,scheduleTempList);
@@ -278,7 +278,7 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener{
                 tv_bg_06.setBackgroundResource(R.color.white);
                 tv_bg_07.setBackgroundResource(R.color.white);
 
-                day = getTempDay(6);
+                day = getTempDay(3);
                 MM = tv4_number.getText().toString();
                 scheduleTempList = doscheduleList(tv4_number.getText().toString());
                 adapter = new ScheduleAdapter(getActivity(),StringList,scheduleTempList);
@@ -293,7 +293,7 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener{
                 tv_bg_06.setBackgroundResource(R.color.white);
                 tv_bg_07.setBackgroundResource(R.color.white);
 
-                day = getTempDay(7);
+                day = getTempDay(4);
                 MM = tv5_number.getText().toString();
                 scheduleTempList = doscheduleList(tv5_number.getText().toString());
                 adapter = new ScheduleAdapter(getActivity(),StringList,scheduleTempList);
@@ -308,7 +308,7 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener{
                 tv_bg_06.setBackgroundResource(R.color.list_text_select_color);
                 tv_bg_07.setBackgroundResource(R.color.white);
 
-                day = getTempDay(8);
+                day = getTempDay(5);
                 MM = tv6_number.getText().toString();
                 scheduleTempList = doscheduleList(tv6_number.getText().toString());
                 adapter = new ScheduleAdapter(getActivity(),StringList,scheduleTempList);
@@ -323,7 +323,7 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener{
                 tv_bg_06.setBackgroundResource(R.color.white);
                 tv_bg_07.setBackgroundResource(R.color.list_text_select_color);
 
-                day = getTempDay(9);
+                day = getTempDay(6);
                 MM = tv7_number.getText().toString();
                 scheduleTempList = doscheduleList(tv7_number.getText().toString());
                 adapter = new ScheduleAdapter(getActivity(),StringList,scheduleTempList);

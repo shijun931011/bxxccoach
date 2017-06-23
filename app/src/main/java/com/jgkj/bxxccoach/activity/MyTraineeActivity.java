@@ -37,7 +37,6 @@ public class MyTraineeActivity extends Activity implements View.OnClickListener,
     private TextView title;
     private TextView textView;
     private RefreshLayout swipeLayout;
-
     private ListView listView;
     private CoachStuAdapter adapter;
     public static final String ARG_PAGE = "ARG_PAGE";
@@ -74,7 +73,6 @@ public class MyTraineeActivity extends Activity implements View.OnClickListener,
         swipeLayout.setOnRefreshListener(this);
         swipeLayout.setOnLoadListener(this);
         swipeLayout.setTag("UNENABLE");
-
         sp = getApplication().getSharedPreferences("Coach", Activity.MODE_PRIVATE);
         editor = sp.edit();
         Gson gson = new Gson();
@@ -158,9 +156,6 @@ public class MyTraineeActivity extends Activity implements View.OnClickListener,
                 break;
             case "ONLOAD":
                 if (stuMsg.getCode() == 200) {
-//                    StuMsglist.clear();
-//                    StuMsglist.addAll(stuMsg.getResult());
-//                    adapter.notifyDataSetChanged();
                     setMyAdapter();
                 } else {
                     Toast.makeText(MyTraineeActivity.this, stuMsg.getReason(), Toast.LENGTH_SHORT).show();
@@ -187,7 +182,6 @@ public class MyTraineeActivity extends Activity implements View.OnClickListener,
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        try{
             TextView name = (TextView) view.findViewById(R.id.name);
             TextView state = (TextView) view.findViewById(R.id.state);
             TextView countTime = (TextView) view.findViewById(R.id.countTime);
@@ -202,9 +196,6 @@ public class MyTraineeActivity extends Activity implements View.OnClickListener,
             intent.putExtra("time",time.getTag().toString());
             intent.putExtra("pid",pid);
             startActivity(intent);
-        }catch (Exception e){
-            Log.i("TAG","数据错误！");
-        }
     }
 
     @Override

@@ -135,15 +135,16 @@ public class SureStudyDialog implements View.OnClickListener{
         if(action.getCode()==200){
             if(button.getText().toString().equals("没有学车")){
                 button.setEnabled(false);
-                button.setText("已拒绝");
+                button.setText("未学车");
                 button1.setVisibility(View.INVISIBLE);
-                button.setTextColor(context.getResources().getColor(R.color.gray));
+                button1.setBackgroundResource(R.drawable.yueche_selector);
+                button.setTextColor(context.getResources().getColor(R.color.white));
             }else if(button.getText().toString().equals("确定学车")){
                 button.setEnabled(false);
                 button.setText("已同意");
                 button1.setVisibility(View.INVISIBLE);
-                button.setTextColor(context.getResources().getColor(R.color.gray));
-            }else if(button.getText().toString().equals("已同意")||button.getText().toString().equals("已拒绝")){
+                button.setTextColor(context.getResources().getColor(R.color.white));
+            }else if(button.getText().toString().equals("已同意")||button.getText().toString().equals("未学车")){
                 Toast.makeText(context,"已选择，请勿再次选择",Toast.LENGTH_SHORT).show();
             }
         }

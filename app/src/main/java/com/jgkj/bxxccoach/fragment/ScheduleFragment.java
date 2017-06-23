@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -19,7 +18,6 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.jgkj.bxxccoach.R;
-import com.jgkj.bxxccoach.activity.ModifyLoginPasswordActivity;
 import com.jgkj.bxxccoach.adapter.ScheduleAdapter;
 import com.jgkj.bxxccoach.bean.UserInfo;
 import com.jgkj.bxxccoach.bean.entity.BaseEntity.BaseEntity;
@@ -326,7 +324,7 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener{
                 day = getTempDay(6);
                 MM = tv7_number.getText().toString();
                 scheduleTempList = doscheduleList(tv7_number.getText().toString());
-                adapter = new ScheduleAdapter(getActivity(),StringList,scheduleTempList);
+                adapter = new ScheduleAdapter(getActivity(), StringList, scheduleTempList);
                 listView.setAdapter(adapter);
                 break;
             case R.id.btn_confirm://提交课表

@@ -193,12 +193,10 @@
             android:name=".activity.HeadlinesActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
-
         <!--修改登密码页面-->
         <activity
             android:name=".activity.ModifyLoginPasswordActivity"
             android:screenOrientation="portrait" />
-
         <!--信用管理页面-->
         <activity
             android:name=".activity.ManagementCreditActivity"

@@ -58,7 +58,13 @@ public class UserInfo {
          * name
          */
         private String cname;
+
+        public void setMaxnum(String maxnum) {
+            this.maxnum = maxnum;
+        }
+
         /**
+
          * 信用
          */
         private String credit;
@@ -102,6 +108,12 @@ public class UserInfo {
          * token值
          */
         private String token;
+
+        private String toAccount;
+
+        public String getToAccount() {
+            return toAccount;
+        }
 
         public String getToken() {
             return token;

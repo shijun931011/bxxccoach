@@ -99,9 +99,9 @@ public class LearnRecordActivity extends Activity implements View.OnClickListene
         }
         stuName.setText(name);
         stuState.setText(state);
-        stuTime.setText(time);
-        stuPhone.setText(phone);
-        stuCount.setText(count+"次");
+        stuTime.setHint(time);
+        stuPhone.setHint(phone);
+        stuCount.setHint(count+"次");
         getStuRecord("1");
     }
 

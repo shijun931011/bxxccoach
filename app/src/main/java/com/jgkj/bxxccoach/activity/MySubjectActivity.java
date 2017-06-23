@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -83,10 +84,6 @@ public class MySubjectActivity extends Activity implements View.OnClickListener{
         back.setVisibility(View.VISIBLE);
         back.setOnClickListener(this);
         title.setText("我的课程");
-//        subSet = (Button) findViewById(R.id.button_forward);
-//        subSet.setVisibility(View.VISIBLE);
-//        subSet.setText("排课");
-//        subSet.setOnClickListener(this);
         listView = (ListView) findViewById(R.id.listView);
     }
 
@@ -98,7 +95,6 @@ public class MySubjectActivity extends Activity implements View.OnClickListener{
         Gson gson = new Gson();
         SubjectDetail sub = gson.fromJson(str,SubjectDetail.class);
         if(sub.getCode()==200){
-//            Toast.makeText(MySubjectActivity.this,sub.getReason(),Toast.LENGTH_SHORT).show();
             list.addAll(sub.getResult());
             adapter = new MySubjectAdapter(MySubjectActivity.this,list,today,pid,token);
             listView.setAdapter(adapter);
@@ -191,6 +187,7 @@ public class MySubjectActivity extends Activity implements View.OnClickListener{
                     }
                     @Override
                     public void onResponse(String s, int i) {
+                        Log.d("BXXC","我的课程："+s);
                         listView.setTag(s);
                         if(listView.getTag()!=null){
                             setListView();

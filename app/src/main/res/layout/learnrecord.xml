@@ -27,23 +27,16 @@
                           android:orientation="horizontal">
                 <TextView android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
-                          android:layout_weight="1"
+                          android:layout_weight="0.35"
                           android:id="@+id/stuName"
                           android:text="张某某"/>
                 <TextView android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
-                          android:layout_weight="1"
+                          android:layout_weight="2"
                           android:id="@+id/stuState"
                           android:text="科目二正在学车"
-                          android:textColor="@color/orange"
                           android:textSize="12sp"/>
-                <Button android:layout_width="70dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/tixian_selector"
-                        android:text="确定学车"
-                        android:textColor="@color/themeColor"
-                        android:textSize="12sp"
-                        android:visibility="invisible"/>
+
             </LinearLayout>
             <LinearLayout android:layout_width="match_parent"
                           android:layout_height="match_parent"
@@ -57,18 +50,11 @@
                           android:textSize="12sp"/>
                 <TextView android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
-                          android:layout_weight="1"
+                          android:layout_weight="10"
                           android:id="@+id/stuTime"
                           android:hint="2016年10月10日"
                           android:textSize="12sp"/>
-                <Button android:id="@+id/notCome"
-                        android:layout_width="70dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/tixian_selector"
-                        android:text="没有学车"
-                        android:textColor="@color/themeColor"
-                        android:textSize="12sp"
-                        android:visibility="invisible"/>
+
             </LinearLayout>
             <LinearLayout android:layout_width="match_parent"
                           android:layout_height="match_parent"
@@ -82,17 +68,11 @@
                           android:textSize="12sp"/>
                 <TextView android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
-                          android:layout_weight="1"
+                          android:layout_weight="10"
                           android:id="@+id/stuPhone"
                           android:hint="暂未填写"
                           android:textSize="12sp"/>
-                <Button android:layout_width="70dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/tixian_selector"
-                        android:text="联系学员"
-                        android:textColor="@color/themeColor"
-                        android:textSize="12sp"
-                        android:visibility="invisible"/>
+
             </LinearLayout>
             <LinearLayout android:layout_width="match_parent"
                           android:layout_height="match_parent"
@@ -101,18 +81,19 @@
                           android:orientation="horizontal">
                 <TextView android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
-                          android:layout_weight="1"
+                          android:layout_weight="0.13"
                           android:hint="学车次数:"
                           android:textSize="12sp"/>
                 <TextView android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
-                          android:layout_weight="1"
+                          android:layout_weight="0.98"
                           android:hint="13次"
                           android:id="@+id/stuCount"
                           android:textSize="12sp"/>
                 <Button android:id="@+id/connectStu"
-                        android:layout_width="70dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:background="@drawable/tixian_selector"
                         android:padding="5dp"
                         android:text="联系学员"

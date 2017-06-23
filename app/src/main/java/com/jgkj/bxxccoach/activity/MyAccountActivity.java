@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +21,7 @@ import com.jgkj.bxxccoach.adapter.IncomeRecordAdapter;
 import com.jgkj.bxxccoach.adapter.WithDrawRecordAdapter;
 import com.jgkj.bxxccoach.bean.IncomeRecord;
 import com.jgkj.bxxccoach.bean.MyAccountMoney;
+import com.jgkj.bxxccoach.bean.UserInfo;
 import com.jgkj.bxxccoach.bean.WithDrawRecord;
 import com.jgkj.bxxccoach.tools.DashboardView;
 import com.jgkj.bxxccoach.tools.RemainBaseDialog;
@@ -51,6 +53,7 @@ public class MyAccountActivity extends Activity implements View.OnClickListener 
     private String token;
     private int currentPage = 1;
     private MyAccountMoney.Result result;
+    private UserInfo userInfo;
     private List<WithDrawRecord.Result> list;
     private DashboardView mDashboardView;
 
@@ -118,17 +121,17 @@ public class MyAccountActivity extends Activity implements View.OnClickListener 
 //        today_go_money = (TextView) findViewById(R.id.today_go_money);
         btn_withdrawal = (Button) findViewById(R.id.btn_withdrawal);
         btn_withdrawal.setOnClickListener(this);
+        SharedPreferences sp = getSharedPreferences("Coach", Activity.MODE_PRIVATE);
+        String str = sp.getString("CoachInfo", null);
+        Gson gson = new Gson();
+        userInfo = gson.fromJson(str,UserInfo.class);
+
         Intent intent = getIntent();
         pid = Integer.parseInt(intent.getStringExtra("pid"));
         token = intent.getStringExtra("token");
         getInComeRecoed(pid,token,currentPage+"");
         getwithdrawalRecord(pid,token,currentPage+"");
     }
-
-
-
-
-
     private void getMyAccountmoney(int pid, String token){
         OkHttpUtils.post()
                 .url(checkBalanceUrl)
@@ -162,7 +165,6 @@ public class MyAccountActivity extends Activity implements View.OnClickListener 
                     }
                 });
     }
-
 
     private void getInComeRecoed(int pid,String token, String page) {
         OkHttpUtils.post()
@@ -264,7 +266,7 @@ public class MyAccountActivity extends Activity implements View.OnClickListener 
                             "您目前的账户余额为零，暂不支持提现").call();
                 }else{
                     new WithDrawalDialog(this, "备注：每月25号到30号可以申请提现，申请提现后，将在五个工作日内到账！",pid+"",token,
-                            result.getTotalMoney(),list.get(0).getToAccount()).call();
+                            result.getTotalMoney(),userInfo.getResult().getToAccount()).call();
                 }
                 break;
 

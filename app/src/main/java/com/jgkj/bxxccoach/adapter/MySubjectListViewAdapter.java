@@ -110,11 +110,11 @@ public class MySubjectListViewAdapter extends BaseAdapter {
             viewHolder.sureCome.setBackgroundResource(R.drawable.yueche_selector);
             viewHolder.sureCome.setTextColor(context.getResources().getColor(R.color.white));
         } else if (res.getStatement().equals("2")) {
-            viewHolder.notCome.setVisibility(View.INVISIBLE);
-            viewHolder.sureCome.setEnabled(false);
-            viewHolder.sureCome.setTextColor(context.getResources().getColor(R.color.white));
-            viewHolder.sureCome.setBackgroundResource(R.drawable.yueche_selector);
-            viewHolder.sureCome.setText("已拒绝");
+            viewHolder.sureCome.setVisibility(View.INVISIBLE);
+            viewHolder.notCome.setEnabled(false);
+            viewHolder.notCome.setText("未学车");
+            viewHolder.notCome.setBackgroundResource(R.drawable.yueche_selector);
+            viewHolder.notCome.setTextColor(context.getResources().getColor(R.color.white));
         }
         viewHolder.notCome.setTag(res.getUid());
         viewHolder.sureCome.setTag(res.getUid());

@@ -59,7 +59,6 @@ public class CoachStuAdapter extends BaseAdapter {
             viewHolder.countTime = (TextView) view.findViewById(R.id.countTime);
             viewHolder.phone = (TextView) view.findViewById(R.id.phone);
             viewHolder.time = (TextView) view.findViewById(R.id.time);
-
             view.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) view.getTag();
@@ -77,17 +76,16 @@ public class CoachStuAdapter extends BaseAdapter {
         viewHolder.name.setTag(stuMsg.getUid()+","+stuMsg.getFile()+","+stuMsg.getName());
         viewHolder.state.setText(stuMsg.getState());
         viewHolder.state.setTag(stuMsg.getState());
-        viewHolder.countTime.setText(stuMsg.getCountTime()+"次");
+        viewHolder.countTime.setHint(stuMsg.getCountTime()+"次");
         viewHolder.countTime.setTag(stuMsg.getCountTime()+"");
         if(stuMsg.getPhone()==null){
-            viewHolder.phone.setText("暂未填写");
+            viewHolder.phone.setHint("暂未填写");
             viewHolder.phone.setTag("暂未填写");
         }else{
-            viewHolder.phone.setText(stuMsg.getPhone());
+            viewHolder.phone.setHint(stuMsg.getPhone());
             viewHolder.phone.setTag(stuMsg.getPhone());
         }
-
-        viewHolder.time.setText(stuMsg.getTime());
+        viewHolder.time.setHint(stuMsg.getTime());
         viewHolder.time.setTag(stuMsg.getTime());
 
         return view;

@@ -77,7 +77,7 @@ public class StuAppraiseAdapter extends BaseAdapter {
         for (int j = 0; j < teachnum; j++) {
             ImageView image = new ImageView(context);
             image.setBackgroundResource(R.drawable.star1);
-            wrapParams = new LinearLayout.LayoutParams(25,25);
+            wrapParams = new LinearLayout.LayoutParams(32,32);
             image.setLayoutParams(wrapParams);
             viewHolder.teach.addView(image);
         }
@@ -90,7 +90,7 @@ public class StuAppraiseAdapter extends BaseAdapter {
         for (int j = 0; j < waitnum; j++) {
             ImageView image = new ImageView(context);
             image.setBackgroundResource(R.drawable.star1);
-            wrapParams = new LinearLayout.LayoutParams(25,25);
+            wrapParams = new LinearLayout.LayoutParams(32,32);
             image.setLayoutParams(wrapParams);
             viewHolder.wait.addView(image);
         }

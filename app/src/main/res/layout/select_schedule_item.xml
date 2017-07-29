@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:minHeight="45dp"
     android:background="#ffffff"
+    android:descendantFocusability="blocksDescendants"
     android:orientation="vertical">
 <LinearLayout
     android:layout_marginLeft="20dp"

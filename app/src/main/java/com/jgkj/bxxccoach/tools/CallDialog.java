@@ -25,7 +25,7 @@ public class CallDialog implements View.OnClickListener{
     private View inflate, sureView;
     private TextView dialog_textView, dialog_sure, dialog_cancel;
 
-    public CallDialog(Context context,String content){
+    public CallDialog(Context context, String content){
         this.content = content;
         this.context = context;
     }
@@ -48,7 +48,7 @@ public class CallDialog implements View.OnClickListener{
         Window dialogWindow = dialog.getWindow();
         // 设置dialog宽度
         dialogWindow.setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,
-                android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
+                ViewGroup.LayoutParams.WRAP_CONTENT);
         // 设置Dialog从窗体中间弹出
         dialogWindow.setGravity(Gravity.CENTER);
         dialog.show();// 显示对话框

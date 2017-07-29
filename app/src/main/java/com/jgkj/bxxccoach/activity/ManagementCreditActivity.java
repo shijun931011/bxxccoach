@@ -5,17 +5,24 @@ import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.jgkj.bxxccoach.R;
 import com.jgkj.bxxccoach.bean.UserInfo;
+import com.jgkj.bxxccoach.bean.entity.ManagementCreditEntity.ManagementCreditResult;
+import com.jgkj.bxxccoach.tools.Urls;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import me.xiaopan.swsv.CircularLayout;
 import me.xiaopan.swsv.SpiderWebScoreView;
+import okhttp3.Call;
 
 
 /**
@@ -31,9 +38,14 @@ public class ManagementCreditActivity extends Activity {
     private ProgressDialog dialog;
     private String str[] = {"好评率","通过率","教学质量","服务态度","综合评价"};
 
+    private SpiderWebScoreView spiderWebScoreView2;
+    private CircularLayout circularLayout2;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        dialog = ProgressDialog.show(ManagementCreditActivity.this, null, "请求中...");
         setContentView(R.layout.activity_management_credit);
 
         //标题
@@ -54,13 +66,14 @@ public class ManagementCreditActivity extends Activity {
         userInfo = gson.fromJson(str,UserInfo.class);
 
         //设置蜘蛛网数据
-        SpiderWebScoreView spiderWebScoreView2 = (SpiderWebScoreView) findViewById(R.id.spiderWeb_mainActivity_2);
-        CircularLayout circularLayout2 = (CircularLayout) findViewById(R.id.layout_mainActivity_circular2);
-        setup(spiderWebScoreView2, circularLayout2, new Score(Float.parseFloat(userInfo.getResult().getPraise())/20),
-                new Score(Float.parseFloat(userInfo.getResult().getPass())/20),
-                new Score(Float.parseFloat(userInfo.getResult().getTeach())),
-                new Score(Float.parseFloat(userInfo.getResult().getWait())),
-                new Score(Float.parseFloat(userInfo.getResult().getCredit())));
+        spiderWebScoreView2 = (SpiderWebScoreView) findViewById(R.id.spiderWeb_mainActivity_2);
+        circularLayout2 = (CircularLayout) findViewById(R.id.layout_mainActivity_circular2);
+//        setup(spiderWebScoreView2, circularLayout2, new Score(Float.parseFloat(userInfo.getResult().getPraise())/20),
+//                new Score(Float.parseFloat(userInfo.getResult().getPass())/20),
+//                new Score(Float.parseFloat(userInfo.getResult().getTeach())),
+//                new Score(Float.parseFloat(userInfo.getResult().getWait())),
+//                new Score(Float.parseFloat(userInfo.getResult().getCredit())));
+        getManagementCredit(userInfo.getResult().getPid(),userInfo.getResult().getTid());
 
     }
 
@@ -98,6 +111,43 @@ public class ManagementCreditActivity extends Activity {
         public Score(float score) {
             this.score = score;
         }
+    }
+
+    /**
+     * 获取信用管理
+     */
+    private void getManagementCredit(String pid,String tid) {
+        Log.d("百信学车","信用管理参数" + " pid=" + pid + " tid=" + tid);
+        OkHttpUtils
+                .post()
+                .url(Urls.credits)
+                .addParams("pid", pid)
+                .addParams("tid",tid)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int i) {
+                        dialog.dismiss();
+                        Toast.makeText(ManagementCreditActivity.this, "网络状态不佳，请稍后再试！", Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public void onResponse(String s, int i) {
+                        dialog.dismiss();
+                        Log.d("百信学车","信用管理结果"+s);
+                        Gson gson = new Gson();
+                        ManagementCreditResult managementCreditResult = gson.fromJson(s,ManagementCreditResult.class);
+                        if(managementCreditResult.getCode() == 200){
+                            setup(spiderWebScoreView2, circularLayout2, new Score(Float.parseFloat(managementCreditResult.getResult().getPraise())/20),
+                                    new Score(Float.parseFloat(managementCreditResult.getResult().getPass())/20),
+                                    new Score(Float.parseFloat(managementCreditResult.getResult().getTeach())),
+                                    new Score(Float.parseFloat(managementCreditResult.getResult().getWait())),
+                                    new Score(Float.parseFloat(managementCreditResult.getResult().getZonghe())));
+                        }else{
+                            Toast.makeText(ManagementCreditActivity.this, managementCreditResult.getReason(), Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                });
     }
 
 }

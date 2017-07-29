@@ -76,8 +76,6 @@ public class CallbackActivity extends Activity implements View.OnClickListener {
         getCode_btn.setOnClickListener(this);
 
         po = new PictureOptimization();
-        ll.setBackgroundDrawable(PictureOptimization.bitmapToDrawble(PictureOptimization.decodeSampledBitmapFromResource(getResources(),
-                R.drawable.login_bg, 480, 760), CallbackActivity.this));
         //返回按钮
         button_backward = (Button) findViewById(R.id.button_backward);
         button_backward.setVisibility(View.VISIBLE);
@@ -199,7 +197,6 @@ public class CallbackActivity extends Activity implements View.OnClickListener {
                     } else {
                         dialog = ProgressDialog.show(CallbackActivity.this, null, "玩命发送中...");
                         phoneNo = phone_editText.getText().toString().trim();
-                        phone_editText.setVisibility(View.GONE);
                         time.start();
                         sendMeg(phoneNo);
                     }
@@ -236,21 +233,3 @@ public class CallbackActivity extends Activity implements View.OnClickListener {
     }
 
 }
-//┏┓　　　┏┓
-//┏┛┻━━━┛┻┓
-//┃　　　　　　　┃ 　
-//┃　　　━　　　┃
-//┃　┳┛　┗┳　┃
-//┃　　　　　　　┃
-//┃　　　┻　　　┃
-//┃　　　　　　　┃
-//┗━┓　　　┏━┛
-//    ┃　　　┃ 神兽保佑　　　　　　　　
-//    ┃　　　┃ 代码无忧！
-//    ┃　　　┗━━━┓
-//    ┃　　　　　　　┣┓
-//    ┃　　　　　　　┏┛
-//    ┗┓┓┏━┳┓┏┛
-// 	    ┃┫┫　┃┫┫
-//      ┗┻┛　┗┻┛
-

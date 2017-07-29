@@ -18,6 +18,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.jgkj.bxxccoach.R;
@@ -26,13 +28,19 @@ import com.jgkj.bxxccoach.activity.MyAccountActivity;
 import com.jgkj.bxxccoach.activity.MySubjectActivity;
 import com.jgkj.bxxccoach.activity.MyTraineeActivity;
 import com.jgkj.bxxccoach.activity.StuAppraiseActivity;
+import com.jgkj.bxxccoach.activity.VoiceActivity;
 import com.jgkj.bxxccoach.activity.WebViewActivity;
 import com.jgkj.bxxccoach.adapter.MyAdapter;
 import com.jgkj.bxxccoach.bean.BannerResult;
 import com.jgkj.bxxccoach.bean.HeadlinesAction;
 import com.jgkj.bxxccoach.bean.UserInfo;
 import com.jgkj.bxxccoach.tools.AutoTextView;
-import com.jgkj.bxxccoach.tools.CallDialog;
+import com.jgkj.bxxccoach.tools.NetworkImageHolderView;
+import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -55,12 +63,6 @@ public class BxxcFragment extends Fragment implements View.OnClickListener{
     private TextView sure_about_car;
     private TextView MyAccount;
     private TextView kefu;
-    private ImageView imageView;
-    private MyAdapter adapter;
-    private ViewPager viewpager;
-    private LinearLayout.LayoutParams wrapParams;
-    private LinearLayout linearlayout;
-    private int currentItem = 0;
     private SharedPreferences.Editor editor;
     private Timer timer = new Timer();
     private Runnable runnable;
@@ -73,6 +75,8 @@ public class BxxcFragment extends Fragment implements View.OnClickListener{
     private String Bannerurl = "http://www.baixinxueche.com/index.php/Home/Apitoken/bannerpics";
     private String headlinesUrl = "http://www.baixinxueche.com/index.php/Home/Apitoken/nowLinesTitleAndroid";
 
+    private List<String> bannerEntitylist;
+    private ConvenientBanner cb_convenientBanner;
     private ImageView imageView1,imageView2,imageView3,imageView4,imageView5;
 
     @Override
@@ -80,7 +84,6 @@ public class BxxcFragment extends Fragment implements View.OnClickListener{
         // Inflate the layout for this fragment
         if(container.getTag()==null){
             view = inflater.inflate(R.layout.fragment_bxxc, container, false);
-            view.scrollBy(android.view.ViewGroup.LayoutParams.MATCH_PARENT,android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
             initView();
             getImage();
             getheadlines();
@@ -111,8 +114,7 @@ public class BxxcFragment extends Fragment implements View.OnClickListener{
         headlines = (AutoTextView) view.findViewById(R.id.headlines);
         headlines.setTag("nourl");
         bxhead = (ImageView) view.findViewById(R.id.bxhead);
-        viewpager = (ViewPager) view.findViewById(R.id.viewPage);
-        linearlayout = (LinearLayout) view.findViewById(R.id.linearlayout);
+        cb_convenientBanner = (ConvenientBanner)view.findViewById(R.id.cb_convenientBanner);
         aboutcar = (TextView) view.findViewById(R.id.about_car);
         evaluate = (TextView) view.findViewById(R.id.evaluate);
         sure_about_car = (TextView) view.findViewById(R.id.sure_about_car);
@@ -238,8 +240,7 @@ public class BxxcFragment extends Fragment implements View.OnClickListener{
     }
 
     /**
-     * 图片请求，几张图片创建相对应的viewPager+ImageView
-     * 来显示图片
+     * 轮播图
      */
     private void getImage() {
         OkHttpUtils
@@ -258,74 +259,14 @@ public class BxxcFragment extends Fragment implements View.OnClickListener{
                         Gson gson = new Gson();
                         BannerResult pic = gson.fromJson(s, BannerResult.class);
                         if (pic.getCode() == 200) {
-                            final List<String> list = pic.getResult();
-                            if (list != null) {
-                                // 实例化listView
-                                List<View> listView = new ArrayList<View>();
-                                for (int k = 0; k < list.size(); k++) {
-                                    imageView = new ImageView(getActivity());
-                                    Glide.with(getActivity()).load(list.get(k)).placeholder(R.drawable.coach_pic).error(R.drawable.coach_pic).into(imageView);
-                                    imageView.setTag(list.get(k));
-                                    imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-                                    listView.add(imageView);
-                                }
-                                adapter = new MyAdapter(getActivity(), listView);
-                                SharedPreferences sp = getActivity().getSharedPreferences("PicCount", Activity.MODE_PRIVATE);
-                                SharedPreferences.Editor editor = sp.edit();
-                                editor.putInt("Count", list.size());
-                                editor.commit();
-                                viewpager.setAdapter(adapter);
+                            bannerEntitylist = pic.getResult();
+                            if (bannerEntitylist != null) {
+                                initImageLoader();
                             }
-                            scrollView();
                         }
                     }
                 });
     }
-
-    //自动轮播
-    private void scrollView() {
-        SharedPreferences sp = getActivity().getSharedPreferences("PicCount", Activity.MODE_PRIVATE);
-        final int count = sp.getInt("Count", -1);
-        if (count != -1) {
-            final ImageView[] dots = new ImageView[count];
-            for (int k = 0; k < count; k++) {
-                ImageView image = new ImageView(getActivity());
-                image.setImageDrawable(getResources().getDrawable(R.drawable.selector));
-                image.setId(k);
-                wrapParams = new LinearLayout.LayoutParams(ViewPager.LayoutParams.WRAP_CONTENT, ViewPager.LayoutParams.WRAP_CONTENT);
-                wrapParams.leftMargin = 5;
-                image.setLayoutParams(wrapParams);
-                linearlayout.addView(image);
-                dots[k] = (ImageView) linearlayout.getChildAt(k);
-                dots[k].setEnabled(true);
-            }
-            final Handler mHandler = new Handler() {
-                @Override
-                public void handleMessage(Message msg) {
-                    super.handleMessage(msg);
-                    if (currentItem < (count - 1)) {
-                        currentItem++;
-                        viewpager.setCurrentItem(currentItem);
-                    } else if (currentItem == (count - 1)) {
-                        currentItem = 0;
-                        viewpager.setCurrentItem(currentItem);
-                    }
-                    for (int j = 0; j < count; j++) {
-                        dots[j].setEnabled(false);
-                    }
-                    dots[currentItem].setEnabled(true);
-                }
-            };
-            TimerTask timerTask = new TimerTask() {
-                @Override
-                public void run() {
-                    mHandler.sendEmptyMessage(0);
-                }
-            };
-            timer.schedule(timerTask, 1000, 3000);
-        }
-    }
-
 
     @Override
     public void onClick(View view) {
@@ -355,14 +296,14 @@ public class BxxcFragment extends Fragment implements View.OnClickListener{
                 intent.putExtra("pid", userInfo.getPid());
                 startActivity(intent);
 
-            case R.id.sure_about_car:
+            case R.id.sure_about_car://确定约车
                 intent.setClass(getActivity(), MySubjectActivity.class);
                 intent.putExtra("pid", userInfo.getPid());
                 intent.putExtra("token", token);
                 startActivity(intent);
                 break;
             case R.id.kefu:
-                new CallDialog(getActivity(), "0551-65555744").call();
+                //new CallDialog(getActivity(), "0551-65555744").call();
                 break;
             case R.id.myAccount:
                 intent.setClass(getActivity(), MyAccountActivity.class);
@@ -370,30 +311,56 @@ public class BxxcFragment extends Fragment implements View.OnClickListener{
                 intent.putExtra("token", token);
                 startActivity(intent);
                 break;
-            case R.id.imageView1:
+            case R.id.imageView1://约车学员
                 intent.setClass(getActivity(), MyTraineeActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.imageView2:
+            case R.id.imageView2://学员评价
                 intent.setClass(getActivity(), StuAppraiseActivity.class);
                 intent.putExtra("pid", userInfo.getPid());
                 startActivity(intent);
                 break;
-            case R.id.imageView3:
+            case R.id.imageView3://我的课程
                 intent.setClass(getActivity(), MySubjectActivity.class);
                 intent.putExtra("pid", userInfo.getPid());
                 intent.putExtra("token", token);
                 startActivity(intent);
                 break;
             case R.id.imageView4:
-                new CallDialog(getActivity(), "0551-65555744").call();
+                intent.setClass(getActivity(), VoiceActivity.class);
+                startActivity(intent);
                 break;
-            case R.id.imageView5:
+            case R.id.imageView5://我的账户
                 intent.setClass(getActivity(), MyAccountActivity.class);
                 intent.putExtra("pid", userInfo.getPid());
                 intent.putExtra("token", token);
                 startActivity(intent);
                 break;
         }
+    }
+
+    //初始化网络图片缓存库
+    private void initImageLoader(){
+        //网络图片例子,结合常用的图片缓存库UIL,你可以根据自己需求自己换其他网络图片库
+        DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder().
+                showImageForEmptyUri(R.mipmap.ic_launcher)
+                .cacheInMemory(true).cacheOnDisk(true).build();
+
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getActivity()).defaultDisplayImageOptions(defaultOptions)
+                .threadPriority(Thread.NORM_PRIORITY - 2)
+                .denyCacheImageMultipleSizesInMemory()
+                .diskCacheFileNameGenerator(new Md5FileNameGenerator())
+                .tasksProcessingOrder(QueueProcessingType.LIFO).build();
+        ImageLoader.getInstance().init(config);
+
+        cb_convenientBanner.setPages(new CBViewHolderCreator<NetworkImageHolderView>() {
+            @Override
+            public NetworkImageHolderView createHolder() {
+                return new NetworkImageHolderView();
+            }
+        },bannerEntitylist)
+        .setPageIndicator(new int[]{R.drawable.ic_page_indicator, R.drawable.ic_page_indicator_focused})
+        //设置翻页的效果，不需要翻页效果可用不设，这里有十几种翻页效果
+        .startTurning(2000);
     }
 }

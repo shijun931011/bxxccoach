@@ -109,6 +109,41 @@ public class UserInfo {
          */
         private String token;
 
+        /**
+         * 角色
+         */
+        private String roles;
+
+        public String getRoles() {
+            return roles;
+        }
+
+        public void setRoles(String roles) {
+            this.roles = roles;
+        }
+
+        public String getCenter_id() {
+            return tid;
+        }
+
+        public void setCenter_id(String center_id) {
+            this.tid = center_id;
+        }
+
+        /**
+         * 角色id
+         */
+
+        private String tid;
+
+        public String getTid() {
+            return tid;
+        }
+
+        public void setTid(String tid) {
+            this.tid = tid;
+        }
+
         private String toAccount;
 
         public String getToAccount() {

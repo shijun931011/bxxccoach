@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jgkj.bxxccoach.R;
 import com.jgkj.bxxccoach.bean.entity.ScheduleEntity.ScheduleEntity;
@@ -81,25 +82,26 @@ public class ScheduleAdapter extends BaseAdapter {
         }
         viewHolder.tv_mune.setText(list.get(i).toString());
 
-//        //设置checkbox状态
-//        viewHolder.linear.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                CheckBox checkBox = (CheckBox)v.findViewById(R.id.checkBox);
-//                if(checkBox.isChecked()){
-//                    checkBox.setChecked(false);
-//                    if(time_solt.contains(list.get(i).toString())){
-//                        time_solt.remove(list.get(i).toString());
-//                    }
-//                }else{
-//                    checkBox.setChecked(true);
-//                    if(!time_solt.contains(list.get(i).toString())){
-//                        time_solt.add(list.get(i).toString());
-//                    }
-//                }
-//            }
-//        });
+        //设置checkbox状态
+        viewHolder.linear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CheckBox checkBox = (CheckBox)v.findViewById(R.id.checkBox);
+                if(checkBox.isChecked()){
+                    checkBox.setChecked(false);
+                    if(time_solt.contains(list.get(i).toString())){
+                        time_solt.remove(list.get(i).toString());
+                    }
+                }else{
+                    checkBox.setChecked(true);
+                    if(!time_solt.contains(list.get(i).toString())){
+                        time_solt.add(list.get(i).toString());
+                    }
+                }
+            }
+        });
 
+        //点击linearlayout设置checkb状态
         viewHolder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

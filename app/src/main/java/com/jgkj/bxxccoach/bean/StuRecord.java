@@ -47,6 +47,18 @@ public class StuRecord {
          * 预约是否预约过
          */
         private String statement;
+        /**
+         * 0 教学 1 陪练
+         */
+        private String class_style;
+
+        public String getClass_style() {
+            return class_style;
+        }
+
+        public void setClass_style(String class_style) {
+            this.class_style = class_style;
+        }
 
         public String getDay() {
             return day;

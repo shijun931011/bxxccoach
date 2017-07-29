@@ -7,9 +7,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -20,6 +23,7 @@ import com.jgkj.bxxccoach.R;
 import com.jgkj.bxxccoach.bean.UserInfo;
 import com.jgkj.bxxccoach.tools.JPushDataUitl;
 import com.jgkj.bxxccoach.tools.Md5;
+import com.jgkj.bxxccoach.tools.Urls;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -43,9 +47,9 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     private TextView changePwd_id;
     private TextView callback;
     private ProgressDialog dialog;
-    private String loginUrl = "http://www.baixinxueche.com/index.php/Home/Apicoachtoken/coachLoginAndroid";
     private UserInfo userInfo;
     private static final String TAG = "JPush";
+    private Button btn_clear_phone_text,btn_clear_pwd_text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +66,59 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         password = (EditText) findViewById(R.id.password);
         login_btn = (Button) findViewById(R.id.login_button_id);
         login_btn.setOnClickListener(this);
+
+        btn_clear_phone_text = (Button) findViewById(R.id.btn_clear_phone_text);
+        btn_clear_phone_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                username.getText().clear();
+            }
+        });
+        btn_clear_pwd_text = (Button) findViewById(R.id.btn_clear_pwd_text);
+        btn_clear_pwd_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                password.getText().clear();
+            }
+        });
+
+        username.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                int textLength = username.getText().length();
+                if (textLength > 0){
+                    btn_clear_phone_text.setVisibility(View.VISIBLE);
+                    btn_clear_pwd_text.setVisibility(View.GONE);
+                }else{
+                    btn_clear_phone_text.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        password.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                int textLength = password.getText().length();
+                if (textLength > 0){
+                    btn_clear_pwd_text.setVisibility(View.VISIBLE);
+                    btn_clear_phone_text.setVisibility(View.GONE);
+                }else{
+                    btn_clear_pwd_text.setVisibility(View.GONE);
+                }
+            }
+        });
     }
     @Override
     public void onClick(View v) {
@@ -99,7 +156,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     private void login(String phone,String encryptmd5) {
             OkHttpUtils
                     .post()
-                    .url(loginUrl)
+                    .url(Urls.coachLogin)
                     .addParams("phone", phone)
                     .addParams("passwd",encryptmd5)                //
                     .build()

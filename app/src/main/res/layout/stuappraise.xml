@@ -1,59 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
-    <include
-        layout="@layout/title"/>
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="40dp"
-                  android:orientation="horizontal"
-                  android:background="#FFFFFF"
-                  android:padding="10dp">
-        <TextView android:id="@+id/good"
-                  android:layout_width="wrap_content"
-                  android:layout_height="match_parent"
-                  android:layout_marginLeft="15dp"
-                  android:layout_weight="1"
-                  android:drawableLeft="@drawable/goodappraise"
-                  android:gravity="center_vertical"
-                  android:text=" 好  评"
-                  android:textColor="@color/colorred"/>
-        <TextView android:id="@+id/medium"
-                  android:layout_width="wrap_content"
-                  android:layout_height="match_parent"
-                  android:layout_weight="1"
-                  android:drawableLeft="@drawable/centerappraise"
-                  android:gravity="center_vertical"
-                  android:paddingLeft="15dp"
-                  android:text=" 中  评"/>
-        <TextView android:id="@+id/bad"
-                  android:layout_width="wrap_content"
-                  android:layout_height="match_parent"
-                  android:layout_weight="1"
-                  android:drawableLeft="@drawable/badappraise"
-                  android:gravity="center_vertical"
-                  android:paddingLeft="15dp"
-                  android:text=" 差  评"/>
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/title" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#FFFFFF"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/good"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/goodappraise"
+            android:gravity="center_vertical"
+            android:text=" 好  评"
+            android:textColor="@color/colorred" />
+
+        <TextView
+            android:id="@+id/medium"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/centerappraise"
+            android:gravity="center_vertical"
+            android:paddingLeft="15dp"
+            android:text=" 中  评" />
+
+        <TextView
+            android:id="@+id/bad"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/badappraise"
+            android:gravity="center_vertical"
+            android:paddingLeft="15dp"
+            android:text=" 差  评" />
     </LinearLayout>
-    <View android:layout_width="match_parent"
-          android:layout_height="0.1dp"
-          android:background="@color/loginbackground"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="@color/loginbackground" />
+
     <com.jgkj.bxxccoach.tools.RefreshLayout
         android:id="@+id/appraiseRefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <ListView android:id="@+id/appraiseListView"
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent"/>
+
+        <ListView
+            android:id="@+id/appraiseListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </com.jgkj.bxxccoach.tools.RefreshLayout>
-    <TextView android:id="@+id/textView"
-              android:text="暂无数据"
-              android:gravity="center"
-              android:layout_margin="10dp"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"/>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:text="暂无数据" />
 
 
 </LinearLayout>

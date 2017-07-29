@@ -83,6 +83,7 @@ public class MySubjectListViewAdapter extends BaseAdapter {
             viewHolder.state = (TextView) view.findViewById(R.id.state);
             viewHolder.applyTime = (TextView) view.findViewById(R.id.applyTime);
             viewHolder.phone = (TextView) view.findViewById(R.id.phone);
+            viewHolder.tv_style = (TextView) view.findViewById(R.id.tv_style);
             viewHolder.connectStu.setTag(i);
             viewHolder.notCome.setTag(i);
             viewHolder.sureCome.setTag(i);
@@ -94,8 +95,14 @@ public class MySubjectListViewAdapter extends BaseAdapter {
         res = list.get(i);
         viewHolder.name.setText(res.getName());
         viewHolder.state.setText(res.getState());
-        viewHolder.applyTime.setHint(res.getNotify_time().substring(0, 11));
+        viewHolder.applyTime.setHint(res.getNotify_time());
         viewHolder.phone.setHint(res.getPhone());
+        //0 教学 1 陪练
+        if("0".equals(res.getClass_style())){
+            viewHolder.tv_style.setHint("私教教学");
+        }else{
+            viewHolder.tv_style.setHint("私教陪练");
+        }
         String path = res.getFile();
         if (!path.endsWith(".jpg") && !path.endsWith(".jpeg") && !path.endsWith(".png") &&
                 !path.endsWith(".GIF") && !path.endsWith(".PNG") && !path.endsWith(".JPG") && !path.endsWith(".gif")) {
@@ -157,7 +164,7 @@ public class MySubjectListViewAdapter extends BaseAdapter {
     static class ViewHolder {
         public Button notCome, sureCome, connectStu;
         public ImageView headImg;
-        public TextView name, state, applyTime, phone;
+        public TextView name, state, applyTime, phone, tv_style;
     }
 
     /**

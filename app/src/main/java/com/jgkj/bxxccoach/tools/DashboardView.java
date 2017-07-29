@@ -99,6 +99,7 @@ public class DashboardView extends View {
         mRectText = new Rect();
 
         mTexts = new String[]{"0","100", "200", "300","400", "500", "600", "700", "800", "900", "1000"};
+        //mTexts = new String[]{"0","200", "400", "600","800", "1000", "1200", "1400", "1600", "1800", "2000"};
         mBgColors = new int[]{ContextCompat.getColor(getContext(), R.color.themeColor),
                 ContextCompat.getColor(getContext(), R.color.themeColor),
                 ContextCompat.getColor(getContext(), R.color.themeColor),

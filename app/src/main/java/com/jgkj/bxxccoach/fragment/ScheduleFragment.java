@@ -30,12 +30,15 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
 import okhttp3.Call;
 
+//排课页面
 public class ScheduleFragment extends Fragment implements View.OnClickListener{
 
     private TextView tv1_week;
@@ -71,11 +74,12 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener{
     private TextView tv_day;
     private ListView listView;
     private Button btn_confirm;
+    private Button button_forward;
 
     private ScheduleAdapter adapter;
     private List<ScheduleEntity> scheduleList = new ArrayList<>();
     private List<ScheduleEntity> scheduleTempList = new ArrayList<>();
-    private List<String> StringList = new ArrayList<>();
+    private List<String> stringList;
 
     private UserInfo userInfo;
     //标记哪一天
@@ -234,7 +238,7 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener{
                 day = getTempDay(0);
                 MM = tv1_number.getText().toString();
                 scheduleTempList = doscheduleList(tv1_number.getText().toString());
-                adapter = new ScheduleAdapter(getActivity(),StringList,scheduleTempList);
+                adapter = new ScheduleAdapter(getActivity(), stringList,scheduleTempList);
                 listView.setAdapter(adapter);
                 break;
             case R.id.linearLayout2:
@@ -249,7 +253,7 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener{
                 day = getTempDay(1);
                 MM = tv2_number.getText().toString();
                 scheduleTempList = doscheduleList(tv2_number.getText().toString());
-                adapter = new ScheduleAdapter(getActivity(),StringList,scheduleTempList);
+                adapter = new ScheduleAdapter(getActivity(), stringList,scheduleTempList);
                 listView.setAdapter(adapter);
                 break;
             case R.id.linearLayout3:
@@ -264,7 +268,7 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener{
                 day = getTempDay(2);
                 MM = tv3_number.getText().toString();
                 scheduleTempList = doscheduleList(tv3_number.getText().toString());
-                adapter = new ScheduleAdapter(getActivity(),StringList,scheduleTempList);
+                adapter = new ScheduleAdapter(getActivity(), stringList,scheduleTempList);
                 listView.setAdapter(adapter);
                 break;
             case R.id.linearLayout4:
@@ -279,7 +283,7 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener{
                 day = getTempDay(3);
                 MM = tv4_number.getText().toString();
                 scheduleTempList = doscheduleList(tv4_number.getText().toString());
-                adapter = new ScheduleAdapter(getActivity(),StringList,scheduleTempList);
+                adapter = new ScheduleAdapter(getActivity(), stringList,scheduleTempList);
                 listView.setAdapter(adapter);
                 break;
             case R.id.linearLayout5:
@@ -294,7 +298,7 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener{
                 day = getTempDay(4);
                 MM = tv5_number.getText().toString();
                 scheduleTempList = doscheduleList(tv5_number.getText().toString());
-                adapter = new ScheduleAdapter(getActivity(),StringList,scheduleTempList);
+                adapter = new ScheduleAdapter(getActivity(), stringList,scheduleTempList);
                 listView.setAdapter(adapter);
                 break;
             case R.id.linearLayout6:
@@ -309,7 +313,7 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener{
                 day = getTempDay(5);
                 MM = tv6_number.getText().toString();
                 scheduleTempList = doscheduleList(tv6_number.getText().toString());
-                adapter = new ScheduleAdapter(getActivity(),StringList,scheduleTempList);
+                adapter = new ScheduleAdapter(getActivity(), stringList,scheduleTempList);
                 listView.setAdapter(adapter);
                 break;
             case R.id.linearLayout7:
@@ -324,11 +328,13 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener{
                 day = getTempDay(6);
                 MM = tv7_number.getText().toString();
                 scheduleTempList = doscheduleList(tv7_number.getText().toString());
-                adapter = new ScheduleAdapter(getActivity(), StringList, scheduleTempList);
+                adapter = new ScheduleAdapter(getActivity(), stringList, scheduleTempList);
                 listView.setAdapter(adapter);
                 break;
             case R.id.btn_confirm://提交课表
                 String time_solt = "";
+                //排序
+                Collections.sort(adapter.time_solt);
                 for(int i=0;i<adapter.time_solt.size();i++){
                     time_solt = time_solt + adapter.time_solt.get(i) + ",";
                 }
@@ -337,7 +343,7 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener{
                     time_solt = time_solt.substring(0,time_solt.length()-1);
                 }
                 dialog = ProgressDialog.show(getActivity(), null, "请求中...");
-                getSubmitTimetable(userInfo.getResult().getPid(),userInfo.getResult().getToken(),day,time_solt,Urls.coachApplyCourseAgain);
+                getSubmitTimetable(userInfo.getResult().getPid(),day,time_solt,Urls.coachApplyCourseAgain);
                 adapter.time_solt.clear();
                 break;
         }
@@ -366,9 +372,9 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener{
                         ScheduleResult scheduleResult = gson.fromJson(s,ScheduleResult.class);
                         scheduleList = scheduleResult.getResult();
 
-                        GetscheduleList();
+                        GetscheduleList(scheduleResult.getInfo());
                         scheduleTempList = doscheduleList(tv1_number.getText().toString());
-                        adapter = new ScheduleAdapter(getActivity(),StringList,scheduleTempList);
+                        adapter = new ScheduleAdapter(getActivity(), stringList,scheduleTempList);
                         listView.setAdapter(adapter);
                     }
                 });
@@ -397,20 +403,19 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener{
 
                         scheduleTempList.clear();
                         scheduleTempList = doscheduleList(MM);
-                        adapter = new ScheduleAdapter(getActivity(),StringList,scheduleTempList);
+                        adapter = new ScheduleAdapter(getActivity(), stringList,scheduleTempList);
                         listView.setAdapter(adapter);
                     }
                 });
     }
 
     //教练提交课表
-    private void getSubmitTimetable(String pid,String token,String day,String time_slot,String url) {
-        Log.i("百信学车","提交课表参数" + "pid=" + pid + "   token=" + token + "   day=" + day + "   time_slot=" + time_slot + "   url=" + url);
+    private void getSubmitTimetable(String pid,String day,String time_slot,String url) {
+        Log.i("百信学车","提交课表参数" + "pid=" + pid +"   day=" + day + "   time_slot=" + time_slot + "   url=" + url);
         OkHttpUtils
                 .post()
                 .url(url)
                 .addParams("pid", pid)
-                .addParams("token", token)
                 .addParams("day", day)
                 .addParams("time_slot", time_slot)
                 .build()
@@ -437,12 +442,9 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener{
                 });
     }
 
-    public void GetscheduleList(){
-        StringList.add("08:00-10:00");
-        StringList.add("10:00-12:00");
-        StringList.add("13:30-15:30");
-        StringList.add("15:30-17:30");
-        StringList.add("19:00-21:00");
+    //处理返回的排课时间段
+    public void GetscheduleList(String info){
+        stringList = Arrays.asList(info.split(","));
     }
 
     //获取点击日期所对应的数据

@@ -3,7 +3,7 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:background="@drawable/linearlayout_shape_background"
-              android:layout_margin="30dp"
+              android:layout_margin="50dp"
               android:orientation="vertical">
 
     <LinearLayout
@@ -53,10 +53,11 @@
 
             <TextView
                  android:id="@+id/dialog_cancel"
-                 android:layout_width="149dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                  android:layout_height="wrap_content"
                  android:gravity="center_horizontal"
-                 android:padding="20dp"
+                 android:padding="15dp"
                  android:text="取消"
                 android:textColor="#3bbaff"
                  android:textSize="17sp"/>
@@ -69,11 +70,11 @@
             />
             <TextView
                  android:id="@+id/dialog_sure"
-                 android:layout_width="match_parent"
+                 android:layout_width="0dp"
                  android:layout_height="wrap_content"
                  android:layout_weight="1"
                  android:gravity="center_horizontal"
-                 android:padding="20dp"
+                 android:padding="15dp"
                  android:text="确定"
                 android:textColor="#3bbaff"
                  android:textSize="17sp"/>

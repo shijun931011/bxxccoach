@@ -1,22 +1,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:orientation="vertical"
-             >
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:background="@color/color_bule"
-                  android:gravity="center"
-                  android:paddingTop="2dp"
-                  android:paddingBottom="2dp"
-                   >
-           <TextView
-               android:id="@+id/tv_day"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="2017年6月5日"
-               android:textColor="@color/white"/>
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_bule"
+        android:gravity="center"
+        android:paddingBottom="2dp"
+        android:paddingTop="2dp">
+
+        <TextView
+            android:id="@+id/tv_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2017年6月5日"
+            android:textColor="@color/white" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -26,23 +28,21 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:background="#ffffff"
-            android:orientation="horizontal"
-        >
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/linearLayout1"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-            >
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tv1_week"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:layout_marginTop="10dp"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:text="周一"
                     android:textSize="18sp" />
@@ -51,8 +51,8 @@
                     android:id="@+id/tv1_number"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:text="11"
                     android:textSize="18sp" />
@@ -62,17 +62,16 @@
             <LinearLayout
                 android:id="@+id/linearLayout2"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-            >
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tv2_week"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:layout_marginTop="10dp"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:text="周二"
                     android:textSize="18sp" />
@@ -81,8 +80,8 @@
                     android:id="@+id/tv2_number"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:text="12"
                     android:textSize="18sp" />
@@ -92,17 +91,16 @@
             <LinearLayout
                 android:id="@+id/linearLayout3"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-            >
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tv3_week"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:layout_marginTop="10dp"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:text="周三"
                     android:textSize="18sp" />
@@ -111,8 +109,8 @@
                     android:id="@+id/tv3_number"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:text="13"
                     android:textSize="18sp" />
@@ -122,17 +120,16 @@
             <LinearLayout
                 android:id="@+id/linearLayout4"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-            >
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tv4_week"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:layout_marginTop="10dp"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:text="周四"
                     android:textSize="18sp" />
@@ -141,8 +138,8 @@
                     android:id="@+id/tv4_number"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:text="14"
                     android:textSize="18sp" />
@@ -152,17 +149,16 @@
             <LinearLayout
                 android:id="@+id/linearLayout5"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-            >
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tv5_week"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:layout_marginTop="10dp"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:text="周五"
                     android:textSize="18sp" />
@@ -171,8 +167,8 @@
                     android:id="@+id/tv5_number"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:text="15"
                     android:textSize="18sp" />
@@ -182,17 +178,16 @@
             <LinearLayout
                 android:id="@+id/linearLayout6"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-            >
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tv6_week"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:layout_marginTop="10dp"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:text="周六"
                     android:textSize="18sp" />
@@ -201,8 +196,8 @@
                     android:id="@+id/tv6_number"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:text="16"
                     android:textSize="18sp" />
@@ -212,17 +207,16 @@
             <LinearLayout
                 android:id="@+id/linearLayout7"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-            >
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tv7_week"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:layout_marginTop="10dp"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:text="周末"
                     android:textSize="18sp" />
@@ -231,8 +225,8 @@
                     android:id="@+id/tv7_number"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:text="17"
                     android:textSize="18sp" />
@@ -244,86 +238,82 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:orientation="horizontal"
-        >
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/tv_bg_01"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:layout_weight="1" />
 
             <TextView
                 android:id="@+id/tv_bg_02"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:layout_weight="1" />
 
             <TextView
                 android:id="@+id/tv_bg_03"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
 
             <TextView
                 android:id="@+id/tv_bg_04"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
 
             <TextView
                 android:id="@+id/tv_bg_05"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
 
             <TextView
                 android:id="@+id/tv_bg_06"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
 
             <TextView
                 android:id="@+id/tv_bg_07"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
 
         </LinearLayout>
 
         <View
-            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
-            android:background="#777777"
-            android:layout_height="0.2dp">
-        </View>
+            android:layout_height="0.2dp"
+            android:layout_marginTop="5dp"
+            android:background="#777777"></View>
 
         <ListView
             android:id="@+id/listView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:divider="@null"
-            android:scrollbars="none"/>
+            android:scrollbars="none" />
 
         <View
             android:layout_width="match_parent"
-            android:background="#777777"
-            android:layout_height="0.1dp">
-        </View>
+            android:layout_height="0.1dp"
+            android:background="#777777"></View>
 
         <Button
             android:id="@+id/btn_confirm"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/btn_selector"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/btn_selector"
             android:text="提交课表"
-            android:textColor="#ffffff"
-            />
+            android:textColor="#ffffff" />
 
     </LinearLayout>
 

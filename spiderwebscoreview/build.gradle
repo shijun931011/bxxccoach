@@ -1,11 +1,12 @@
 apply plugin: 'com.android.library'
 android {
-    compileSdkVersion 25
+    //compileSdkVersion告诉gradle使用哪个版本Android SDK编译你的应用
+    compileSdkVersion 22
     buildToolsVersion "25.0.0"
 
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion 25
+        minSdkVersion 11
+        targetSdkVersion 22
         versionCode 100
         versionName "1.0.0"
     }

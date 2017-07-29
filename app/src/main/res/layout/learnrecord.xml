@@ -1,111 +1,164 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
-    <include layout="@layout/title"/>
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="120dp"
-                  android:orientation="horizontal">
-        <ImageView android:layout_width="100dp"
-                   android:layout_height="100dp"
-                   android:layout_margin="10dp"
-                   android:scaleType="fitXY"
-                   android:id="@+id/head"
-                   android:src="@drawable/defaultimg"/>
-        <LinearLayout android:layout_width="match_parent"
-                      android:layout_height="100dp"
-                      android:layout_marginBottom="10dp"
-                      android:layout_marginRight="10dp"
-                      android:layout_marginTop="10dp"
-                      android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-            <LinearLayout android:layout_width="match_parent"
-                          android:layout_height="match_parent"
-                          android:layout_weight="1"
-                          android:gravity="center_vertical"
-                          android:orientation="horizontal">
-                <TextView android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:layout_weight="0.35"
-                          android:id="@+id/stuName"
-                          android:text="张某某"/>
-                <TextView android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:layout_weight="2"
-                          android:id="@+id/stuState"
-                          android:text="科目二正在学车"
-                          android:textSize="12sp"/>
+    <include layout="@layout/title" />
 
-            </LinearLayout>
-            <LinearLayout android:layout_width="match_parent"
-                          android:layout_height="match_parent"
-                          android:layout_weight="1"
-                          android:gravity="center_vertical"
-                          android:orientation="horizontal">
-                <TextView android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:layout_weight="1"
-                          android:hint="报名时间:"
-                          android:textSize="12sp"/>
-                <TextView android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:layout_weight="10"
-                          android:id="@+id/stuTime"
-                          android:hint="2016年10月10日"
-                          android:textSize="12sp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/head"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/defaultimg" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/stuName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.35"
+                    android:text="张某某" />
+
+                <TextView
+                    android:id="@+id/stuState"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="科目二正在学车"
+                    android:textSize="12sp" />
 
             </LinearLayout>
-            <LinearLayout android:layout_width="match_parent"
-                          android:layout_height="match_parent"
-                          android:layout_weight="1"
-                          android:gravity="center_vertical"
-                          android:orientation="horizontal">
-                <TextView android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:layout_weight="1"
-                          android:hint="联系电话:"
-                          android:textSize="12sp"/>
-                <TextView android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:layout_weight="10"
-                          android:id="@+id/stuPhone"
-                          android:hint="暂未填写"
-                          android:textSize="12sp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="报名时间:"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/stuTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10"
+                    android:hint="2016年10月10日"
+                    android:textSize="12sp" />
 
             </LinearLayout>
-            <LinearLayout android:layout_width="match_parent"
-                          android:layout_height="match_parent"
-                          android:layout_weight="1"
-                          android:gravity="center_vertical"
-                          android:orientation="horizontal">
-                <TextView android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:layout_weight="0.13"
-                          android:hint="学车次数:"
-                          android:textSize="12sp"/>
-                <TextView android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:layout_weight="0.98"
-                          android:hint="13次"
-                          android:id="@+id/stuCount"
-                          android:textSize="12sp"/>
-                <Button android:id="@+id/connectStu"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/tixian_selector"
-                        android:padding="5dp"
-                        android:text="联系学员"
-                        android:textColor="@color/white"
-                        android:textSize="12sp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="联系电话:"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/stuPhone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10"
+                    android:hint="暂未填写"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.13"
+                    android:hint="学车次数:"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/stuCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.98"
+                    android:hint="13次"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/connectStu"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/tixian_selector"
+                    android:padding="5dp"
+                    android:text="联系学员"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-    <View android:layout_width="match_parent"
-          android:layout_height="5dp"
-          android:background="@color/white"/>
-    <ListView android:id="@+id/listView"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/white" />
+
+    <com.jgkj.bxxccoach.tools.RefreshLayout
+        android:id="@+id/refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center" />
+    </com.jgkj.bxxccoach.tools.RefreshLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="暂无学车记录！"
+        android:textSize="17sp"
+        android:visibility="gone" />
+
 </LinearLayout>

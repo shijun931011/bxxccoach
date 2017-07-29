@@ -65,6 +65,10 @@ public class SubjectDetail {
              */
             private String file;
             /**
+             * 学员类型
+             */
+            private String class_style;
+            /**
              * 0代表教练没有判断
              * 1代表确定来了
              * 2代表确定没来
@@ -97,6 +101,14 @@ public class SubjectDetail {
 
             public String getStatement() {
                 return statement;
+            }
+
+            public String getClass_style() {
+                return class_style;
+            }
+
+            public void setClass_style(String class_style) {
+                this.class_style = class_style;
             }
         }
     }

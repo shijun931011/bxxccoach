@@ -34,6 +34,7 @@ import okhttp3.Call;
 public class MyTraineeActivity extends Activity implements View.OnClickListener,AdapterView.OnItemClickListener,
         RefreshLayout.OnLoadListener,SwipeRefreshLayout.OnRefreshListener{
     private Button back;
+    private Button button_forward;
     private TextView title;
     private TextView textView;
     private RefreshLayout swipeLayout;
@@ -52,7 +53,6 @@ public class MyTraineeActivity extends Activity implements View.OnClickListener,
 
     private String MyTraineeUrl = "http://www.baixinxueche.com/index.php/Home/Apicoachtoken/myStuPeople";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,17 +62,13 @@ public class MyTraineeActivity extends Activity implements View.OnClickListener,
     }
     private void initView(){
         title = (TextView) findViewById(R.id.text_title);
-        title.setText("学员中心");
+        title.setText("我的学员");
         back = (Button) findViewById(R.id.button_backward);
         back.setVisibility(View.VISIBLE);
         back.setOnClickListener(this);
+        button_forward = (Button)findViewById(R.id.button_forward);
+        button_forward.setOnClickListener(this);
 
-        //下拉刷新
-        swipeLayout = (RefreshLayout) findViewById(R.id.refresh);
-        swipeLayout.setColorSchemeResources(R.color.color_bule2, R.color.color_bule, R.color.color_bule2, R.color.color_bule3);
-        swipeLayout.setOnRefreshListener(this);
-        swipeLayout.setOnLoadListener(this);
-        swipeLayout.setTag("UNENABLE");
         sp = getApplication().getSharedPreferences("Coach", Activity.MODE_PRIVATE);
         editor = sp.edit();
         Gson gson = new Gson();
@@ -82,6 +78,22 @@ public class MyTraineeActivity extends Activity implements View.OnClickListener,
             pid = user.getResult().getPid();
             Log.d("BXXC","教练ID:"+pid);
         }
+
+        //中心或者学校管理者显示
+        if("2".equals(user.getResult().getRoles()) || "3".equals(user.getResult().getRoles())){
+            button_forward.setText("团队成员");
+            button_forward.setVisibility(View.VISIBLE);
+        }else{
+            button_forward.setVisibility(View.GONE);
+        }
+
+        //下拉刷新
+        swipeLayout = (RefreshLayout) findViewById(R.id.refresh);
+        swipeLayout.setColorSchemeResources(R.color.color_bule2, R.color.color_bule, R.color.color_bule2, R.color.color_bule3);
+        swipeLayout.setOnRefreshListener(this);
+        swipeLayout.setOnLoadListener(this);
+        swipeLayout.setTag("UNENABLE");
+
         listView = (ListView) findViewById(R.id.coach_Stu_ListView);
         textView = (TextView) findViewById(R.id.textView);
         listView.setOnItemClickListener(this);
@@ -239,6 +251,11 @@ public class MyTraineeActivity extends Activity implements View.OnClickListener,
         switch (view.getId()){
             case  R.id.button_backward:
                 finish();
+                break;
+            case  R.id.button_forward://团队成员
+                Intent intent = new Intent();
+                intent.setClass(MyTraineeActivity.this,TeamMemberActivity.class);
+                startActivity(intent);
                 break;
         }
     }

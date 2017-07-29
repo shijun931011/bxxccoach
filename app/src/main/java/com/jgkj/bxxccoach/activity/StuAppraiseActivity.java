@@ -51,12 +51,8 @@ public class StuAppraiseActivity extends Activity implements View.OnClickListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stuappraise);
-        try{
-            initView();
-        }catch (Exception e){
-            e.printStackTrace();
-            Toast.makeText(StuAppraiseActivity.this,"数据加载异常，请稍后再试！",Toast.LENGTH_SHORT).show();
-        }
+
+        initView();
     }
 
     private void initView() {
@@ -77,7 +73,7 @@ public class StuAppraiseActivity extends Activity implements View.OnClickListene
         bad.setOnClickListener(this);
         refresh = (RefreshLayout) findViewById(R.id.appraiseRefresh);
 
-        refresh.setTag("isFirst");
+        refresh.setTag("refresh");
         refresh.setColorSchemeResources(R.color.color_bule2, R.color.color_bule, R.color.color_bule2, R.color.color_bule3);
         refresh.setOnRefreshListener(this);
         refresh.setOnLoadListener(this);
@@ -89,31 +85,27 @@ public class StuAppraiseActivity extends Activity implements View.OnClickListene
 
     //给listView添加数据设置适配器
     private void getList() {
-        if (dialog.isShowing()) {
-            dialog.dismiss();
-        }
+        dialog.dismiss();
         String str = listView.getTag().toString();
         Gson gson = new Gson();
         StuAppraise stu = gson.fromJson(str, StuAppraise.class);
         if (stu.getCode() == 200) {
-//            Toast.makeText(StuAppraiseActivity.this, stu.getReason(), Toast.LENGTH_SHORT).show();
-            list.addAll(stu.getResult());
-            if (refresh.getTag().toString().equals("isFirst")) {
-                adapter = new StuAppraiseAdapter(StuAppraiseActivity.this, list);
-                listView.setAdapter(adapter);
-            } else if (refresh.getTag().toString().equals("onload")) {
-                adapter = new StuAppraiseAdapter(StuAppraiseActivity.this, list);
-                listView.setAdapter(adapter);
-            } else if (refresh.getTag().toString().equals("refresh")) {
+            if (refresh.getTag().toString().equals("onload")) {
+                list.addAll(stu.getResult());
                 adapter.notifyDataSetChanged();
+            } else if (refresh.getTag().toString().equals("refresh")) {
+                list = stu.getResult();
+                adapter = new StuAppraiseAdapter(StuAppraiseActivity.this, list);
+                listView.setAdapter(adapter);
             }
         } else {
+            list.clear();
             if (list.size() == 0){
                 refresh.setVisibility(View.GONE);
                 textView.setVisibility(View.VISIBLE);
             }
-            adapter = new StuAppraiseAdapter(StuAppraiseActivity.this, list);
-            listView.setAdapter(adapter);
+//            adapter = new StuAppraiseAdapter(StuAppraiseActivity.this, list);
+//            listView.setAdapter(adapter);
             Toast.makeText(StuAppraiseActivity.this, "没有更多评论记录", Toast.LENGTH_SHORT).show();
         }
 
@@ -126,11 +118,10 @@ public class StuAppraiseActivity extends Activity implements View.OnClickListene
                 finish();
                 break;
             case R.id.good:
-                refresh.setTag("isFirst");
+                refresh.setTag("refresh");
                 refresh.setVisibility(View.VISIBLE);
 
                 list.clear();
-//                adapter.notifyDataSetChanged();
                 good.setTextColor(getResources().getColor(R.color.colorred));
                 bad.setTextColor(getResources().getColor(R.color.lightblack));
                 medium.setTextColor(getResources().getColor(R.color.lightblack));
@@ -140,12 +131,11 @@ public class StuAppraiseActivity extends Activity implements View.OnClickListene
                 getAppraise(pid, currentPage + "", appraiseClass);
                 break;
             case R.id.bad:
-                refresh.setTag("isFirst");
+                refresh.setTag("refresh");
                 refresh.setVisibility(View.VISIBLE);
 
                 currentPage = 1;
                 list.clear();
-//                adapter.notifyDataSetChanged();
                 bad.setTextColor(getResources().getColor(R.color.colorred));
                 good.setTextColor(getResources().getColor(R.color.lightblack));
                 medium.setTextColor(getResources().getColor(R.color.lightblack));
@@ -154,13 +144,11 @@ public class StuAppraiseActivity extends Activity implements View.OnClickListene
                 getAppraise(pid, currentPage + "", appraiseClass);
                 break;
             case R.id.medium:
-                refresh.setTag("isFirst");
+                refresh.setTag("refresh");
                 refresh.setVisibility(View.VISIBLE);
 
                 currentPage = 1;
                 list.clear();
-
-//                adapter.notifyDataSetChanged();
                 medium.setTextColor(getResources().getColor(R.color.colorred));
                 bad.setTextColor(getResources().getColor(R.color.lightblack));
                 good.setTextColor(getResources().getColor(R.color.lightblack));
@@ -208,11 +196,10 @@ public class StuAppraiseActivity extends Activity implements View.OnClickListene
                 currentPage = 1;
                 list.clear();
                 refresh.setTag("refresh");
-                adapter.notifyDataSetChanged();
                 getAppraise(pid, currentPage + "", appraiseClass);
                 refresh.setRefreshing(false);
             }
-        }, 2000);
+        }, 0);
     }
 
     @Override
@@ -225,6 +212,6 @@ public class StuAppraiseActivity extends Activity implements View.OnClickListene
                 getAppraise(pid, currentPage + "", appraiseClass);
                 refresh.setLoading(false);
             }
-        }, 2000);
+        }, 0);
     }
 }

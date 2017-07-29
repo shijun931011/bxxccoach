@@ -35,8 +35,8 @@ import java.util.List;
 import okhttp3.Call;
 
 /**
- * Created by fangzhou on 2017/1/4.
- * 教练段个人中心页面
+ * Created by tongshoujun on 2017/7/28.
+ * 教练端个我的账户页面
  */
 
 public class MyAccountActivity extends Activity implements View.OnClickListener {

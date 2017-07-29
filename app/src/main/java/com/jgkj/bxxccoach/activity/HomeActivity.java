@@ -13,6 +13,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -29,6 +30,7 @@ import com.jgkj.bxxccoach.bean.Version;
 import com.jgkj.bxxccoach.fragment.BxxcFragment;
 import com.jgkj.bxxccoach.fragment.PersonalFragment;
 import com.jgkj.bxxccoach.fragment.ScheduleFragment;
+import com.jgkj.bxxccoach.tools.CallDialog;
 import com.jgkj.bxxccoach.tools.GetVersion;
 import com.jgkj.bxxccoach.tools.JPushDataUitl;
 import com.jgkj.bxxccoach.tools.UpdateManger;
@@ -54,9 +56,13 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
     private TextView mtabScheduleTxt;
     private TextView mtabPersonalTxt;
     private TextView title;
-
     private Button button_forward;
+    private ImageView im_phone;
     private UserInfo userInfo;
+
+    private SharedPreferences sp;
+    private SharedPreferences.Editor editor;
+    private UserInfo user;
 
     // 定义一个变量，来标识是否退出
     private static boolean isExit = false;
@@ -115,6 +121,8 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
         mviewPager = (ViewPager) findViewById(R.id.viewPager);
         title = ((TextView) findViewById(R.id.text_title));
         button_forward = (Button)findViewById(R.id.button_forward);
+        im_phone = (ImageView)findViewById(R.id.im_phone);
+        im_phone.setOnClickListener(this);
 
         //初始化三个Tab对应的Fragment
         mfragments = new ArrayList<Fragment>();
@@ -150,6 +158,9 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
             case R.id.tab_personal:
                 setSelect(2);
                 break;
+            case R.id.im_phone:
+                new CallDialog(HomeActivity.this, "0551-65555744").call();
+                break;
 
         }
     }
@@ -176,34 +187,41 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
                 mtabBxxcTxt.setTextColor(this.getResources().getColor(R.color.themeColor));
                 title.setText("首页");
                 button_forward.setVisibility(View.GONE);
+                im_phone.setVisibility(View.VISIBLE);
                 break;
             case 1:
                 mtabScheduleImg.setImageResource(R.drawable.class_selected);
                 mtabScheduleTxt.setTextColor(this.getResources().getColor(R.color.themeColor));
                 title.setText("我的课表");
+                im_phone.setVisibility(View.GONE);
 
-                SharedPreferences sp = getSharedPreferences("Coach", Activity.MODE_PRIVATE);
-                String str = sp.getString("CoachInfo", null);
+                sp = getApplication().getSharedPreferences("Coach", Activity.MODE_PRIVATE);
+                editor = sp.edit();
                 Gson gson = new Gson();
-                userInfo = gson.fromJson(str,UserInfo.class);
-                if(userInfo.getResult().getClass_type().equals("私教班") || userInfo.getResult().getClass_type().equals("陪练")){
-                    button_forward.setVisibility(View.GONE);
-                }else{
-                    button_forward.setText("设置");
+
+                if(sp.getString("CoachInfo",null)!=null){
+                    user = gson.fromJson(sp.getString("CoachInfo",null),UserInfo.class);
+                }
+
+                //中心或者学校管理者显示
+                if("2".equals(user.getResult().getRoles()) || "3".equals(user.getResult().getRoles())){
+                    button_forward.setText("团队成员");
                     button_forward.setVisibility(View.VISIBLE);
                     button_forward.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             Intent intent = new Intent();
-                            intent.setClass(getApplicationContext(),StuAmountActivity.class);
-                            intent.putExtra("maxNum",userInfo.getResult().getMaxnum());
-                            intent.putExtra("token",userInfo.getResult().getToken());
+                            intent.setClass(HomeActivity.this,TeamMemberActivity.class);
+                            intent.putExtra("flag","HomeActivity");//设个标识
                             startActivity(intent);
                         }
                     });
+                }else{
+                    button_forward.setVisibility(View.GONE);
                 }
                 break;
             case 2:
+                im_phone.setVisibility(View.GONE);
                 button_forward.setVisibility(View.GONE);
                 mtabPersonalImg.setImageResource(R.drawable.me_selected);
                 mtabPersonalTxt.setTextColor(this.getResources().getColor(R.color.themeColor));

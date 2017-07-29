@@ -18,6 +18,7 @@ import com.jgkj.bxxccoach.R;
 import com.jgkj.bxxccoach.adapter.MySubjectAdapter;
 import com.jgkj.bxxccoach.bean.SubjectDetail;
 import com.jgkj.bxxccoach.tools.CountListView;
+import com.jgkj.bxxccoach.tools.Urls;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -49,7 +50,6 @@ public class MySubjectActivity extends Activity implements View.OnClickListener{
     private TextView textView;
     private List<SubjectDetail.Result> list = new ArrayList<>();
     private View headView;
-    private String getSubjectUrl = "http://www.baixinxueche.com/index.php/Home/Apicoachtoken/showCourseStu";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +83,7 @@ public class MySubjectActivity extends Activity implements View.OnClickListener{
         back = (Button) findViewById(R.id.button_backward);
         back.setVisibility(View.VISIBLE);
         back.setOnClickListener(this);
-        title.setText("我的课程");
+        title.setText("确定约车");
         listView = (ListView) findViewById(R.id.listView);
     }
 
@@ -176,7 +176,7 @@ public class MySubjectActivity extends Activity implements View.OnClickListener{
     private void getData(String pid) {
         OkHttpUtils
                 .post()
-                .url(getSubjectUrl)
+                .url(Urls.showCourseStu)
                 .addParams("pid", pid)
                 .addParams("day",today)
                 .build()

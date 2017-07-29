@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_my_trainee"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/title"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/voicebg">
+
+        <ImageView
+            android:id="@+id/iv_bobaobg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/bobaobg"
+            android:layout_centerInParent="true"/>
+
+        <LinearLayout
+            android:layout_below="@+id/iv_bobaobg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:layout_centerInParent="true">
+
+            <ImageView
+                android:id="@+id/im_moni"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/moni"
+                android:layout_marginRight="10dp"
+                android:layout_centerInParent="true"/>
+
+            <ImageView
+                android:id="@+id/im_bobao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/huatong"
+                android:layout_marginLeft="10dp"
+                android:layout_centerInParent="true"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

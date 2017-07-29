@@ -61,7 +61,13 @@ public class LearnRecordAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) view.getTag();
         }
         stuRecord = list.get(i);
-        Glide.with(context).load(file).into(viewHolder.head_img);
+        //Glide.with(context).load(file).into(viewHolder.head_img);
+        if(stuRecord.getClass_style().equals("0")){
+            viewHolder.head_img.setImageResource(R.drawable.xue);
+        }else{
+            viewHolder.head_img.setImageResource(R.drawable.pei);
+        }
+
         viewHolder.day_time.setText(stuRecord.getDay()+" "+stuRecord.getTime_slot());
         if(stuRecord.getStatement().equals("0")){
             viewHolder.isSuccess.setText("预约成功");

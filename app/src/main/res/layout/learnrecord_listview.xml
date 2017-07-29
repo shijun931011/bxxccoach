@@ -1,26 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:padding="10dp"
-              android:gravity="center_vertical"
-              android:orientation="horizontal">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
     <ImageView
         android:id="@+id/head_img"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_weight="0"
-        android:src="@drawable/defaultimg"/>
-    <TextView android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_weight="1"
-              android:layout_marginLeft="10dp"
-              android:id="@+id/day_time"
-              android:text="2016年11月15日12:30-17:00"/>
-    <TextView android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_weight="0"
-              android:id="@+id/isSuccess"
-              android:text="预约成功"
-              android:textColor="@color/orange"/>
+        android:src="@drawable/defaultimg" />
+
+    <TextView
+        android:id="@+id/day_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_weight="1"
+        android:text="2016年11月15日12:30-17:00" />
+
+    <TextView
+        android:id="@+id/isSuccess"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:text="预约成功"
+        android:textColor="@color/orange" />
 </LinearLayout>

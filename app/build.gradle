@@ -3,22 +3,14 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.0"
+    useLibrary 'org.apache.http.legacy'
     defaultConfig {
         applicationId "com.jgkj.bxxccoach"
-        minSdkVersion 19
-        targetSdkVersion 25
-        versionCode 5
-        versionName '2.0.2'
+        minSdkVersion 15
+        //targetSdkVersion 25
+        versionCode 6
+        versionName '2.0.3'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
-    defaultConfig {
-        applicationId "com.jgkj.bxxccoach" //JPush上注册的包名.
         multiDexEnabled true
         ndk {
             //选择要添加的对应cpu类型的.so库。
@@ -32,6 +24,17 @@ android {
                 JPUSH_APPKEY : "937c4fc7d58b97292186693c", //JPush上注册的包名对应的appkey.
                 JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
         ]
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
     }
     productFlavors {
     }
@@ -47,4 +50,14 @@ dependencies {
     compile 'com.android.support:support-v4:25.0.0'
     testCompile 'junit:junit:4.12'
     compile project(':spiderwebscoreview')
+
+    compile 'com.android.support:recyclerview-v7:25.0.0'
+    compile 'com.zhy:base-rvadapter:3.0.2'
+    compile 'com.zhy:base-adapter:3.0.2'
+    compile 'com.android.support:multidex:1.0.0'
+
+    //:fastjson
+    compile 'com.alibaba:fastjson:1.2.8'
+    //banner图
+    compile 'com.bigkoo:convenientbanner:2.0.5'
 }

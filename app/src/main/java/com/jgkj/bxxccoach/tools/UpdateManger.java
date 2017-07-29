@@ -36,7 +36,7 @@ public class UpdateManger {
     private String apkUrl;
     private Dialog noticeDialog;// 提示有软件更新的对话框
     private Dialog downloadDialog;// 下载对话框
-    private static final String savePath = "/sdcard/BX/";// 保存apk的文件夹
+    private static final String savePath = "/sdcard/BXXC/";// 保存apk的文件夹
     private static final String saveFileName = savePath + "bxxccoach.apk";
     // 进度条与通知UI刷新的handler和msg常量
     private ProgressBar mProgress;

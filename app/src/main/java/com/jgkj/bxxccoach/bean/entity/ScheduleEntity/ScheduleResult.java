@@ -12,6 +12,8 @@ public class ScheduleResult {
 
     private String reason;
 
+    private String info;
+
     private List<ScheduleEntity> result ;
 
     public int getCode() {
@@ -28,6 +30,14 @@ public class ScheduleResult {
 
     public void setReason(String reason) {
         this.reason = reason;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
     }
 
     public List<ScheduleEntity> getResult() {

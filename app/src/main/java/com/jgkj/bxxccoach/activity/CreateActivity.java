@@ -408,9 +408,6 @@ public class CreateActivity extends Activity implements View.OnClickListener, Lo
                 amapLocation.getCityCode();//城市编码
                 amapLocation.getAdCode();//地区编码
 
-                Log.i("测试","latitude=" + amapLocation.getLatitude());
-                Log.i("测试","longitude=" + amapLocation.getLongitude());
-
                 //保存经纬度
                 latitude = amapLocation.getLatitude();
                 longitude = amapLocation.getLongitude();

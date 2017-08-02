@@ -30,25 +30,18 @@ public class WithDrawalDialog implements View.OnClickListener{
     private Dialog dialog, sureDialog;
     private View inflate, sureView;
     private String token;
+    private String tid;
     private String pid;
     private String totalMoney;
     private String toAccount;
     private TextView dialog_card_imfo;
-
     private TextView dialog_textView, dialog_sure, dialog_cancel;
 
-    /**
-     * 教练余额提现
-     *
-     * @param savedInstanceState
-     * pid, token
-     */
-    private String tixianUrl = "http://www.baixinxueche.com/index.php/Home/Apicoachtoken/balanceTixian";
-
-    public WithDrawalDialog(Context context,String content, String pid, String token, String totalMoney, String toAccount){
+    public WithDrawalDialog(Context context,String content, String pid, String token, String totalMoney, String toAccount,String tid){
         this.content = content;
         this.context = context;
         this.token = token;
+        this.tid = tid;
         this.pid = pid;
         this.totalMoney = totalMoney;
         this.toAccount = toAccount;
@@ -78,11 +71,12 @@ public class WithDrawalDialog implements View.OnClickListener{
     }
 
 
-    private void getWithDrawal(String pid, String token){
+    private void getWithDrawal(String pid, String token,String tid){
         OkHttpUtils
                 .post()
-                .url(tixianUrl)
+                .url(Urls.gerenBalanceTixian)
                 .addParams("pid",pid)
+                .addParams("tid",tid)
                 .addParams("token", token)
                 .build()
                 .execute(new StringCallback() {
@@ -97,12 +91,10 @@ public class WithDrawalDialog implements View.OnClickListener{
                         Gson gson = new Gson();
                         WithDrawalResult withDrawalResult  = gson.fromJson(s, WithDrawalResult.class);
                         if (withDrawalResult.getCode() == 200){
-                            Toast.makeText(context, withDrawalResult.getReason(), Toast.LENGTH_SHORT).show();
-
+                            AppUtility.showToastMsg(withDrawalResult.getReason());
                             updata();
-                        }else{
-                            Toast.makeText(context,  withDrawalResult.getReason(), Toast.LENGTH_SHORT).show();
                         }
+                        AppUtility.showToastMsg(withDrawalResult.getReason());
                     }
                 });
 
@@ -113,7 +105,7 @@ public class WithDrawalDialog implements View.OnClickListener{
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.dialog_sure:
-                getWithDrawal(pid,token);
+                getWithDrawal(pid,token,tid);
                 dialog.dismiss();
                 break;
             case R.id.dialog_cancel:

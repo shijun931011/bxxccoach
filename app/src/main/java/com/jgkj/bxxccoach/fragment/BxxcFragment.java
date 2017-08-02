@@ -25,6 +25,7 @@ import com.google.gson.Gson;
 import com.jgkj.bxxccoach.R;
 import com.jgkj.bxxccoach.activity.HeadlinesActivity;
 import com.jgkj.bxxccoach.activity.MyAccountActivity;
+import com.jgkj.bxxccoach.activity.MyCentreAccountActivity;
 import com.jgkj.bxxccoach.activity.MySubjectActivity;
 import com.jgkj.bxxccoach.activity.MyTraineeActivity;
 import com.jgkj.bxxccoach.activity.StuAppraiseActivity;
@@ -36,6 +37,7 @@ import com.jgkj.bxxccoach.bean.HeadlinesAction;
 import com.jgkj.bxxccoach.bean.UserInfo;
 import com.jgkj.bxxccoach.tools.AutoTextView;
 import com.jgkj.bxxccoach.tools.NetworkImageHolderView;
+import com.jgkj.bxxccoach.tools.RemainBaseDialog;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -104,6 +106,7 @@ public class BxxcFragment extends Fragment implements View.OnClickListener{
         Gson gson = new Gson();
         user = gson.fromJson(sp.getString("CoachInfo", null), UserInfo.class);
         userInfo = user.getResult();
+        token = userInfo.getToken();
     }
 
     private void initView(){
@@ -299,7 +302,7 @@ public class BxxcFragment extends Fragment implements View.OnClickListener{
             case R.id.sure_about_car://确定约车
                 intent.setClass(getActivity(), MySubjectActivity.class);
                 intent.putExtra("pid", userInfo.getPid());
-                intent.putExtra("token", token);
+                intent.putExtra("token", userInfo.getToken());
                 startActivity(intent);
                 break;
             case R.id.kefu:
@@ -308,7 +311,7 @@ public class BxxcFragment extends Fragment implements View.OnClickListener{
             case R.id.myAccount:
                 intent.setClass(getActivity(), MyAccountActivity.class);
                 intent.putExtra("pid", userInfo.getPid());
-                intent.putExtra("token", token);
+                intent.putExtra("token", userInfo.getToken());
                 startActivity(intent);
                 break;
             case R.id.imageView1://约车学员
@@ -323,7 +326,7 @@ public class BxxcFragment extends Fragment implements View.OnClickListener{
             case R.id.imageView3://我的课程
                 intent.setClass(getActivity(), MySubjectActivity.class);
                 intent.putExtra("pid", userInfo.getPid());
-                intent.putExtra("token", token);
+                intent.putExtra("token", userInfo.getToken());
                 startActivity(intent);
                 break;
             case R.id.imageView4:
@@ -331,10 +334,23 @@ public class BxxcFragment extends Fragment implements View.OnClickListener{
                 startActivity(intent);
                 break;
             case R.id.imageView5://我的账户
-                intent.setClass(getActivity(), MyAccountActivity.class);
-                intent.putExtra("pid", userInfo.getPid());
-                intent.putExtra("token", token);
-                startActivity(intent);
+                //管理者
+                if("2".equals(userInfo.getRoles()) || "3".equals(userInfo.getRoles())){
+                    intent.setClass(getActivity(), MyCentreAccountActivity.class);
+                    intent.putExtra("pid", userInfo.getPid());
+                    intent.putExtra("token", userInfo.getToken());
+                    startActivity(intent);
+                }else{
+                    //附属没有权限
+                    if("0".equals(userInfo.getRoles())){
+                        new RemainBaseDialog(getActivity(), "抱歉，" + "你没有访问权限").call();
+                    }else{
+                        intent.setClass(getActivity(), MyAccountActivity.class);
+                        intent.putExtra("pid", userInfo.getPid());
+                        intent.putExtra("token", userInfo.getToken());
+                        startActivity(intent);
+                    }
+                }
                 break;
         }
     }

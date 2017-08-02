@@ -57,7 +57,7 @@
                 android:layout_weight="1"
                  android:layout_height="wrap_content"
                  android:gravity="center_horizontal"
-                 android:padding="15dp"
+                 android:padding="10dp"
                  android:text="取消"
                 android:textColor="#3bbaff"
                  android:textSize="17sp"/>
@@ -74,7 +74,7 @@
                  android:layout_height="wrap_content"
                  android:layout_weight="1"
                  android:gravity="center_horizontal"
-                 android:padding="15dp"
+                 android:padding="10dp"
                  android:text="确定"
                 android:textColor="#3bbaff"
                  android:textSize="17sp"/>

@@ -32,5 +32,8 @@
     <color name="list_text_select_color">#FF822E</color>
     <color name="themeColor">#37363C</color>
     <color name="green">#009049</color>
+    <color name="whitewhite">#ffffff</color>
+    <color name="linearBack">#BBBBBB</color>
+    <color name="textColor">#9C9B9B</color>
 
 </resources>

@@ -48,7 +48,7 @@ public class GroupMemberAdapter extends BaseAdapter {
         ViewHolder viewHolder = null;
         if (view == null) {
             viewHolder = new ViewHolder();
-            view = inflater.inflate(R.layout.item_group,viewGroup, false);
+            view = inflater.inflate(R.layout.item_group1,viewGroup, false);
             viewHolder.tv_name = (TextView) view.findViewById(R.id.tv_name);
             view.setTag(viewHolder);
         } else {

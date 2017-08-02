@@ -70,7 +70,7 @@ public class VoiceActivity extends Activity implements View.OnClickListener {
                 break;
             case R.id.tv_exist:
                 Intent intents = new Intent();
-                intents.setClass(VoiceActivity.this,ExistActivity.class);
+                intents.setClass(VoiceActivity.this,ChooseRouteActivity.class);
                 startActivity(intents);
                 break;
             case R.id.tv_cancel:

@@ -87,9 +87,7 @@ public class ExistActivity extends Activity implements View.OnClickListener,Loca
     private double longitude;
 
     private ProgressDialog dialogs;
-
     private AllRouteResult allRouteResult;
-
     private UserInfo userInfo;
 
     //记录定点

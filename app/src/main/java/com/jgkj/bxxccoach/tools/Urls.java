@@ -39,4 +39,15 @@ public class Urls {
     //信用管理接口
     public static String credits = "http://www.baixinxueche.com/index.php/Home/Apicoachtokenpt/credits";
 
+    //我的账户接口
+    public static String checkBalance = "http://www.baixinxueche.com/index.php/Home/Apicoachtokenpt/checkBalance";
+
+    //进账记录接口
+    public static String gerenAccountDetails = "http://www.baixinxueche.com/index.php/Home/Apicoachtokenpt/gerenAccountDetails";
+
+    //提现明细接口
+    public static String gerenTixianDetails = "http://www.baixinxueche.com/index.php/Home/Apicoachtokenpt/gerenTixianDetails";
+
+    //提现接口
+    public static String gerenBalanceTixian = "http://www.baixinxueche.com/index.php/Home/Apicoachtokenpt/gerenBalanceTixian";
 }

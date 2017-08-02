@@ -268,6 +268,11 @@
             android:name=".activity.ExistActivity"
             android:screenOrientation="portrait" />
 
+        <!--选择路线页面-->
+        <activity
+            android:name=".activity.ChooseRouteActivity"
+            android:screenOrientation="portrait" />
+
         <!--手动播报页面-->
         <activity
             android:name=".activity.BroadcastActivity"
@@ -286,6 +291,16 @@
         <!--团队成员排课页面-->
         <activity
             android:name=".activity.ScheduleActivity"
+            android:screenOrientation="portrait" />
+
+        <!--管理者我的账户页面-->
+        <activity
+            android:name=".activity.MyCentreAccountActivity"
+            android:screenOrientation="portrait" />
+
+        <!--附属教练账户页面-->
+        <activity
+            android:name=".activity.CoashAccountActivity"
             android:screenOrientation="portrait" />
 
         <provider
